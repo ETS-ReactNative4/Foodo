@@ -10,10 +10,11 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { homeOutline, settingsOutline, personOutline } from 'ionicons/icons';
 import Settings from './pages/Settings';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import AddPost from './pages/AddPost';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -47,24 +48,27 @@ const App = () => (
           <Route exact path="/home">
             <Home />
           </Route>
+          <Route exact path="/AddPost">
+            <AddPost />
+          </Route>
           <Route path="/profile">
             <Profile />
           </Route>
           <Route exact path="/">
-            <Redirect to="/settings" />
+            <Redirect to="/home" />
           </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="settings" href="/settings">
-            <IonIcon icon={triangle} />
+            <IonIcon icon={settingsOutline} />
             <IonLabel>Settings</IonLabel>
           </IonTabButton>
           <IonTabButton tab="home" href="/home">
-            <IonIcon icon={ellipse} />
+            <IonIcon icon={homeOutline} />
             <IonLabel>Home</IonLabel>
           </IonTabButton>
           <IonTabButton tab="profile" href="/profile">
-            <IonIcon icon={square} />
+            <IonIcon icon={personOutline} />
             <IonLabel>Profile</IonLabel>
           </IonTabButton>
         </IonTabBar>
