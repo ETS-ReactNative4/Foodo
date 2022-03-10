@@ -1,5 +1,12 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import '../style/Home.css';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
+import "../style/Home.css";
+import Post from "../components/post";
 
 export default function Home() {
   return (
@@ -10,12 +17,9 @@ export default function Home() {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 2</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+        <IonHeader collapse="condense"></IonHeader>
+        <Post />
       </IonContent>
     </IonPage>
   );
-};
+}
