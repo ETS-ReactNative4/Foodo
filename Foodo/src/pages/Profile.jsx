@@ -1,10 +1,11 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/react';
 import '../style/Profile.css';
 
 export default function Profile() {
   return (
     <IonPage>
       <IonHeader>
+        
         <IonToolbar>
           <IonTitle>Profile</IonTitle>
         </IonToolbar>
@@ -15,6 +16,7 @@ export default function Profile() {
             <IonTitle size="large">Profile</IonTitle>
           </IonToolbar>
         </IonHeader>
+        <IonButton color="success" href="/Addpost">Create post</IonButton>
       </IonContent>
     </IonPage>
   );
