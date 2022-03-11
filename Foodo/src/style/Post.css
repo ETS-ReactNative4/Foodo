@@ -1,0 +1,48 @@
+ion-card-content {
+  background: var(--ion-color-primary);
+}
+
+ion-col {
+  color: var(--ion-color-tertiary);
+  margin: auto;
+  font-size: var(--font-size-p);
+}
+
+ion-card-title {
+  color: var(--ion-color-tertiary);
+  font-size: var(--font-size-h2);
+
+}
+
+ion-row{
+  color: var(--ion-color-tertiary);
+  font-size: var(--font-size-p);
+}
+
+.round {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+.geoText {
+    font-size: var(--font-size-p2);
+}
+
+.divider {
+    display: inline;
+    border-bottom: 1px solid var(--ion-color-tertiary);
+    width: 80%;
+    margin: auto;
+}
+
+ion-button.postSettingBtn{
+    --background: var(--ion-color-secondary);
+    --border-radius: 50%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 99;
+    height: 40px;
+    width: 40px;
+}
