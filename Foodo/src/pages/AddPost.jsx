@@ -16,6 +16,7 @@ import { IonContent,
     IonLabel,
     IonButton, } from "@ionic/react";
 import { useState, useEffect } from "react";
+import dbT from "../service/service.jsx";
 // import { Camera, CameraResultType } from "@capacitor/camera";
 // import { camera } from "ionicons/icons";
 
@@ -35,8 +36,9 @@ export default function PostForm({ post, handleSubmit }) {
 
     function submitEvent(event) {
         event.preventDefault();
-        const formData = { title: title, Description: Description };
-        handleSubmit(formData);
+        //const formData = { title: title, Description: Description };
+        //handleSubmit(formData);
+        dbT.createPost(title, Description, null, 2);
         
     }
 
