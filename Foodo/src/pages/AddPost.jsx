@@ -16,11 +16,13 @@ import { IonContent,
     IonLabel,
     IonButton, } from "@ionic/react";
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import dbT from "../service/service.jsx";
 // import { Camera, CameraResultType } from "@capacitor/camera";
 // import { camera } from "ionicons/icons";
 
 export default function PostForm({ post, handleSubmit }) {
+    const history = useHistory();
     const [title, setTitle] = useState("");
     const [Description, setDescription] = useState("");
     // const [image, setImage] = useState("");
@@ -36,10 +38,13 @@ export default function PostForm({ post, handleSubmit }) {
 
     function submitEvent(event) {
         event.preventDefault();
+
         //const formData = { title: title, Description: Description };
         //handleSubmit(formData);
+        if(title != null && Description != null){
         dbT.createPost(title, Description, null, 2);
-        
+        history.replace('/home');
+        }
     }
 
     // async function takePicture() {
