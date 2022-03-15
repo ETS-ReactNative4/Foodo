@@ -16,11 +16,13 @@ import { IonContent,
     IonLabel,
     IonButton,
   
-    useIonViewDidEnter, } from "@ionic/react";
+    useIonViewDidEnter,
+    useIonViewWillEnter, } from "@ionic/react";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import dbT from "../service/service.jsx";
 import { Camera, CameraResultType } from '@capacitor/camera';
+import { Geolocation } from '@capacitor/geolocation';
 
 // import { Camera, CameraResultType } from "@capacitor/camera";
 // import { camera } from "ionicons/icons";
@@ -30,7 +32,39 @@ export default function PostForm({ post, handleSubmit }) {
     const [title, setTitle] = useState("");
     const [Description, setDescription] = useState("");
     const [image, setImage] = useState("");
+  
+    const [locale, setLocale] = useState("");
+    const [country, setCountry] = useState("");
     // const [imageFile, setImageFile] = useState({});
+
+    
+
+const printCurrentPosition = async () => {
+  const coordinates = await Geolocation.getCurrentPosition();
+  const lo = coordinates.coords.longitude;
+  const la = coordinates.coords.latitude;
+  console.log('Current position:', coordinates);
+  
+
+  await getLocation(lo, la);
+  
+};
+
+const getLocation = async (lo, la) => {
+    
+    
+    const key = 'cd0394416d67f2b60cde05246ddd3b89';
+    const url = `http://api.positionstack.com/v1/reverse?access_key=${key}&query=${la},${lo}&limit=1`;
+    console.log(url);
+    const response = await fetch(url);
+    const data = await response.json();
+
+    console.log(data.data[0].administrative_area);
+    setLocale(data.data[0].administrative_area);
+    setCountry(data.data[0].country);
+    
+    console.log(country);
+}
 
     const takePicture = async () => {
         const image = await Camera.getPhoto({
@@ -55,19 +89,25 @@ export default function PostForm({ post, handleSubmit }) {
         if (post) {
             setTitle(post.title);
             setDescription(post.Description);
+            
             // setImage(post.image);
         }
     }, [post]);
 
+   
+        
     
 
-    function submitEvent(event) {
-        event.preventDefault();
+    
 
+    async function submitEvent(event) {
+        event.preventDefault();
+        
+        console.log(locale);
         //const formData = { title: title, Description: Description };
         //handleSubmit(formData);
         if(title != null && Description != null){
-        dbT.createPost(title, Description, image, 2);
+        dbT.createPost(title, Description, image, 2, country, locale);
         history.replace('/home');
         }
     }
@@ -103,6 +143,10 @@ export default function PostForm({ post, handleSubmit }) {
             </IonItem>
             <IonButton onClick={takePicture}>
         picture
+        </IonButton>
+
+        <IonButton onClick={printCurrentPosition}>
+        GeoLocation
         </IonButton>
             {/* <IonItem onClick={takePicture} lines="none">
                 <IonLabel>Choose Image</IonLabel>
