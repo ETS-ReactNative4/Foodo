@@ -14,7 +14,7 @@
 .profileImgRow {
     position: relative;
     margin-top: -50px;
-    z-index: 99;
+    z-index: 19;
 }
 
 .profileImg {
