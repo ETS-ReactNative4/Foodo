@@ -15,6 +15,8 @@ import Settings from './pages/Settings';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import AddPost from './pages/AddPost';
+import FrontPage from './pages/FrontPage';
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -49,7 +51,7 @@ const App = () => (
           <Route exact path="/home">
             <Home />
           </Route>
-          <Route exact path="/AddPost">
+          <Route exact path="/addPost">
             <AddPost />
           </Route>
           <Route path="/profile">
@@ -58,6 +60,10 @@ const App = () => (
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>
+          <Route exact path="/frontpage">
+            <FrontPage />
+          </Route>
+          
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="settings" href="/settings" >
