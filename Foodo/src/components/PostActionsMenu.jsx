@@ -3,6 +3,7 @@ import { ellipsisHorizontalOutline } from "ionicons/icons";
 import "../style/PostActionsMenu.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import dbT from '../service/service.jsx';
 
 export default function PostActionMenu({ post }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,13 +18,9 @@ export default function PostActionMenu({ post }) {
 
   const deletePost = () => {
     setIsOpen(false);
+    
     console.log("post deleted");
   };
-
-  const postActionMenuNavigation = [
-    { link: "#", text: "Edit" },
-    { link: "#", text: "Delete", onClick: deletePost },
-  ];
 
   return (
     <>

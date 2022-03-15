@@ -10,6 +10,7 @@ import "../style/Home.css";
 import Post from "../components/post";
 import { useState } from "react";
 import dbT from "../service/service.jsx";
+import Header from '../components/Header';
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -31,6 +32,7 @@ export default function Home() {
 
   return (
     <IonPage>
+      <Header />
       <IonContent fullscreen>
         {posts.map((post) => (
           <Post post={post} key={post.id} />
