@@ -27,7 +27,7 @@ export default function Post({post}) {
               <IonCardTitle>{post.title}</IonCardTitle>
             </IonCol>
             <IonCol size="6">
-              <User userId = {post.userId} />
+              <User userId = {post.uid} />
             </IonCol>
           </IonRow>
           <IonRow>

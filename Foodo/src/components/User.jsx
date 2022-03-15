@@ -1,19 +1,17 @@
-import { IonRow, IonCol } from "@ionic/react";
+import { IonRow, IonCol, useIonViewWillEnter } from "@ionic/react";
 import { useEffect, useState } from "react";
 import dbT from "../service/service.jsx";
 
 export default function User({ userId }) {
   const [user, setUser] = useState({});
+
   useEffect(() => {
-    async function loadUser() {
-      const response = await fetch(
-        "https://foodreviewappdb-default-rtdb.firebaseio.com/users.json"
-      );
-      const data = await response.json();
-      setUser(data);
-    }
-    loadUser();
-  }, [userId]);
+    const userArr = async () => {
+      const u = await dbT.getSingleUser(userId);
+      setUser(u);
+    };
+    userArr();
+  }, []);
 
   return (
     <>

@@ -7,37 +7,34 @@ import {
   useIonViewWillEnter,
 } from "@ionic/react";
 import "../style/Home.css";
-import Post from "../components/Post";
+import Post from "../components/post";
 import { useState } from "react";
 import dbT from "../service/service.jsx";
 
 export default function Home() {
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState([]);
 
-  const postsArr = (data) => {
-    const allPosts = Object.keys(data).map((key) => ({
+  async function postsArr() {
+    const data = await dbT.getPost();
+    // map object into an array with objects
+    const postsArray = Object.keys(data).map((key) => ({
       id: key,
       ...data[key],
     }));
-    return allPosts;
-  };
+    return postsArray;
+  }
 
-  const load = async () => {
-    const response = await fetch(
-      "https://foodreviewappdb-default-rtdb.firebaseio.com/posts.json"
-    );
-    const data = await response.json();
-    setPosts(postsArr(data));
-  };
+  
 
-  useIonViewWillEnter(() => {
-    load();
-  });
+  useIonViewWillEnter(async () => {
+    const p = await postsArr();
+    setPosts(p);
+});
 
   return (
     <IonPage>
       <IonContent fullscreen>
-        {posts?.map((post) => (
+        {posts.map((post) => (
           <Post post={post} key={post.id} />
         ))}
       </IonContent>
