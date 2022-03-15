@@ -27,13 +27,14 @@ export default function Post({post}) {
               <IonCardTitle>{post.title}</IonCardTitle>
             </IonCol>
             <IonCol size="6">
-              <User userId = {post.uid} />
+              <User userId = {post.uid} postLocale = {post.locale} postCountry = {post.country}/>
             </IonCol>
           </IonRow>
           <IonRow>
             <div className="divider"></div>
           </IonRow>
           <IonRow>
+            
             {post.body}
           </IonRow>
         </IonCardContent>
