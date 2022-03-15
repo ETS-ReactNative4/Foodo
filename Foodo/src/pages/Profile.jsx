@@ -16,7 +16,7 @@ export default function Profile() {
             <IonTitle size="large">Profile</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonButton color="success" href="/Addpost">Create post</IonButton>
+        <IonButton color="secondary" href="/Addpost">Create post</IonButton>
       </IonContent>
     </IonPage>
   );

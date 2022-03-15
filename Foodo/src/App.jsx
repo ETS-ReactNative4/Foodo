@@ -31,6 +31,7 @@ import '@ionic/react/css/text-alignment.css';
 import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
+import './style/App.css';
 
 /* Theme variables */
 import './theme/variables.css';
@@ -41,7 +42,7 @@ const App = () => (
   <IonApp>
     <IonReactRouter>
       <IonTabs>
-        <IonRouterOutlet>
+        <IonRouterOutlet color="secondary">
           <Route exact path="/settings">
             <Settings />
           </Route>
@@ -59,9 +60,9 @@ const App = () => (
           </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
-          <IonTabButton tab="settings" href="/settings">
+          <IonTabButton tab="settings" href="/settings" >
             <IonIcon icon={settingsOutline} />
-            <IonLabel>Settings</IonLabel>
+            <IonLabel >Settings</IonLabel>
           </IonTabButton>
           <IonTabButton tab="home" href="/home">
             <IonIcon icon={homeOutline} />
