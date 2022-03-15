@@ -1,0 +1,52 @@
+.postMenuBtnContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 99;
+}
+
+ion-button.postSettingBtn {
+  --background: var(--ion-color-secondary);
+  --border-radius: 50%;
+  margin: 0;
+  height: 40px;
+  width: 40px;
+}
+
+.menuNav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    border: 1px solid black;
+    box-shadow: 0 16px 24px 2px black;
+
+}
+
+.showMenu{
+    display: flex;
+}
+
+.menuNav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menuNavLinks{
+    padding: 8px 12px;
+    text-decoration: none;
+    color: var(--ion-color-tertiary);
+}
+
+.menuNavLinks:first-child{
+    background: var(--ion-color-secondary);
+}
+
+.menuNavLinks:last-child{
+    background: var(--ion-color-danger);
+}

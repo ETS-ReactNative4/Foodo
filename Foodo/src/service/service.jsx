@@ -11,7 +11,7 @@ class Db{
        const response = await fetch(this.postUrl+'.json');
        const data = await response.json();
        
-       //console.log(data);
+       console.log(data);
        this.posts = data;
     }
 
@@ -26,7 +26,7 @@ class Db{
     async fetchUser(){
         const response = await fetch(this.userUrl+'.json');
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         this.users = data;
      }
 

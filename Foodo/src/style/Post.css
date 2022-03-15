@@ -1,3 +1,7 @@
+ion-card.cardContainer {
+  position: relative;
+}
+
 ion-card-content {
   background: var(--ion-color-primary);
 }
@@ -36,13 +40,3 @@ ion-row{
     margin: auto;
 }
 
-ion-button.postSettingBtn{
-    --background: var(--ion-color-secondary);
-    --border-radius: 50%;
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 99;
-    height: 40px;
-    width: 40px;
-}

@@ -1,23 +1,23 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/react';
-import '../style/Profile.css';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonButton,
+} from "@ionic/react";
+import "../style/Profile.css";
+import Header from "../components/Header";
 
 export default function Profile() {
   return (
     <IonPage>
-      <IonHeader>
-        
-        <IonToolbar>
-          <IonTitle>Profile</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <Header />
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Profile</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonButton color="secondary" href="/Addpost">Create post</IonButton>
+        <IonButton color="success" href="/Addpost">
+          Create post
+        </IonButton>
       </IonContent>
     </IonPage>
   );
-};
+}
