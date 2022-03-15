@@ -1,12 +1,12 @@
-import { IonButton, IonIcon } from "@ionic/react";
-import { ellipsisHorizontalOutline } from "ionicons/icons";
+import { IonButton } from "@ionic/react";
 import "../style/PostActionsMenu.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import dbT from '../service/service.jsx';
+import dbT from "../service/service.jsx";
 
 export default function PostActionMenu({ post }) {
   const [isOpen, setIsOpen] = useState(false);
+
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
   };
@@ -16,10 +16,11 @@ export default function PostActionMenu({ post }) {
     console.log("edited post");
   };
 
-  const deletePost = () => {
+  const deletePost = async () => {
     setIsOpen(false);
-    
+    await dbT.deletePost(post);
     console.log("post deleted");
+    console.log(post);
   };
 
   return (

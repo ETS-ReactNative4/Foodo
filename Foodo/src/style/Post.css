@@ -6,7 +6,7 @@ ion-card-content {
   background: var(--ion-color-primary);
 }
 
-ion-col {
+ion-col.postCardCol {
   color: var(--ion-color-tertiary);
   margin: auto;
   font-size: var(--font-size-p);
@@ -18,7 +18,7 @@ ion-card-title {
 
 }
 
-ion-row{
+ion-row.postCardRow{
   color: var(--ion-color-tertiary);
   font-size: var(--font-size-p);
 }

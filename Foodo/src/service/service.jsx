@@ -97,6 +97,7 @@ class Db{
             method: 'DELETE'
         });
         console.log(response);
+        console.log(id);
     }
 
     async deleteUser(id){

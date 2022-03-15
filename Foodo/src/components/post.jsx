@@ -14,7 +14,7 @@ export default function Post({post}) {
   return (
     <>
       <IonCard className="cardContainer">
-        <PostActionsMenu />
+        <PostActionsMenu post={post.id} />
         <IonCardHeader>
           <img
             src={post.postImg}
@@ -22,18 +22,18 @@ export default function Post({post}) {
           />
         </IonCardHeader>
         <IonCardContent>
-          <IonRow size="12">
-            <IonCol size="6">
+          <IonRow className="postCardRow" size="12">
+            <IonCol className="postCardCol" size="6">
               <IonCardTitle>{post.title}</IonCardTitle>
             </IonCol>
-            <IonCol size="6">
+            <IonCol className="postCardCol" size="6">
               <User userId = {post.uid} />
             </IonCol>
           </IonRow>
-          <IonRow>
+          <IonRow className="postCardRow">
             <div className="divider"></div>
           </IonRow>
-          <IonRow>
+          <IonRow className="postCardRow">
             {post.body}
           </IonRow>
         </IonCardContent>
