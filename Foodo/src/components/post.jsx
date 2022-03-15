@@ -5,49 +5,36 @@ import {
   IonCardContent,
   IonRow,
   IonCol,
-  IonButton,
 } from "@ionic/react";
-import { person } from "ionicons/icons";
 import "../style/Post.css";
+import User from "./User";
+import PostActionsMenu from "./PostActionsMenu";
 
-export default function Post() {
+export default function Post({post}) {
   return (
     <>
-      <IonCard>
-        <IonButton className="postSettingBtn">. . .</IonButton>
+      <IonCard className="cardContainer">
+        <PostActionsMenu />
         <IonCardHeader>
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/3/3c/IMG_logo_%282017%29.svg"
+            src={post.postImg}
             alt=""
           />
         </IonCardHeader>
         <IonCardContent>
           <IonRow size="12">
             <IonCol size="6">
-              <IonCardTitle>Mine Sandwiches</IonCardTitle>
+              <IonCardTitle>{post.title}</IonCardTitle>
             </IonCol>
             <IonCol size="6">
-              <IonRow>
-                <IonCol size="7">
-                  Rasmus Abelgaard<br></br>
-                  <span className="geoText">Aarhus</span>
-                </IonCol>
-                <IonCol size="5">
-                  <img
-                    className="round"
-                    src="https://learnenglish.britishcouncil.org/sites/podcasts/files/2021-10/RS6715_492969113-hig.jpg"
-                    alt=""
-                  />
-                </IonCol>
-              </IonRow>
+              <User userId = {post.userId} />
             </IonCol>
           </IonRow>
           <IonRow>
             <div className="divider"></div>
           </IonRow>
           <IonRow>
-            Mine sandwiches er de bedste der findes, ingen kan hamle sig op med
-            disse lækkerier
+            {post.body}
           </IonRow>
         </IonCardContent>
       </IonCard>
