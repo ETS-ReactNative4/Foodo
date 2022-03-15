@@ -4,7 +4,7 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  IonButton,
+  IonButton
 } from "@ionic/react";
 import "../style/Profile.css";
 import Header from "../components/Header";
@@ -14,9 +14,14 @@ export default function Profile() {
     <IonPage>
       <Header />
       <IonContent fullscreen>
-        <IonButton color="success" href="/Addpost">
-          Create post
-        </IonButton>
+        
+          <IonButton color="success" href="/Addpost">
+            Create post
+          </IonButton>
+          <IonButton color="success" href="/FrontPage">
+            Sign out
+          </IonButton>
+        
       </IonContent>
     </IonPage>
   );
