@@ -15,10 +15,10 @@ export default function FrontPage(){
       <Header />
       <IonContent fullscreen className='frontPage' >
         <div className="Front-buttons">
-          <IonButton className="Front-button" color="light" href="/Addpost" width="80%;">
+          <IonButton className="Front-button" color="light" href="/Login" width="80%;">
               Login
             </IonButton>
-            <IonButton className="Front-button" color="secondary" href="/FrontPage">
+            <IonButton className="Front-button" color="secondary" href="/SignUp">
               Sign up
             </IonButton>
         </div>

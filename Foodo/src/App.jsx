@@ -16,6 +16,8 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import AddPost from './pages/AddPost';
 import FrontPage from './pages/FrontPage';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -62,6 +64,12 @@ const App = () => (
           </Route>
           <Route exact path="/frontpage">
             <FrontPage />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/signup">
+            <SignUp />
           </Route>
           
         </IonRouterOutlet>
