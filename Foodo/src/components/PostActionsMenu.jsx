@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import dbT from "../service/service.jsx";
 
-export default function PostActionMenu({ post }) {
+export default function PostActionMenu({ post, handleIsShow }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -14,6 +14,7 @@ export default function PostActionMenu({ post }) {
   const editPost = () => {
     setIsOpen(false);
     console.log("edited post");
+    handleIsShow(true);
   };
 
   async function deletePost() {
@@ -31,9 +32,9 @@ export default function PostActionMenu({ post }) {
         </IonButton>
         <div className={`menuNav ${isOpen ? "showMenu" : ""}`}>
           <ul>
-            <Link to="#" className="menuNavLinks" onClick={() => editPost()}>
+            <IonButton to="#" className="menuNavLinks" onClick={() => editPost()}>
               Edit
-            </Link>
+            </IonButton>
             <IonButton to="#" className="menuNavLinks" onClick={deletePost} role="destructive" type="button">
               Delete
             </IonButton>
