@@ -26,24 +26,14 @@ export default function Post({post}) {
             <IonCol className="postCardCol" size="6">
               <IonCardTitle>{post.title}</IonCardTitle>
             </IonCol>
-<<<<<<< HEAD
-            <IonCol className="postCardCol" size="6">
-              <User userId = {post.uid} />
-=======
             <IonCol size="6">
               <User userId = {post.uid} postLocale = {post.locale} postCountry = {post.country}/>
->>>>>>> main
             </IonCol>
           </IonRow>
           <IonRow className="postCardRow">
             <div className="divider"></div>
           </IonRow>
-<<<<<<< HEAD
           <IonRow className="postCardRow">
-=======
-          <IonRow>
-            
->>>>>>> main
             {post.body}
           </IonRow>
         </IonCardContent>
