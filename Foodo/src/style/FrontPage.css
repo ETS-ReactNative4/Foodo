@@ -1,0 +1,14 @@
+ion-content.frontPage {
+    --ion-background-color: var(--ion-color-primary);
+}
+
+.Front-buttons{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50vh;
+}
+
+.Front-button{
+    width: 80%;
+}

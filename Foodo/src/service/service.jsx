@@ -46,12 +46,14 @@ class Db{
      }
 
 
-     async createPost(title, body, url, uid){
+     async createPost(title, body, url, uid, country, locale){
          const post = {
               title: title,
               body: body,
               url: url,
               uid: uid,
+              country: country,
+              locale: locale,
               id: Date.now()
          }
          const response = await fetch(this.postUrl+'.json', {
