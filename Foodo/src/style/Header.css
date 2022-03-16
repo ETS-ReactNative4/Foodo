@@ -2,6 +2,7 @@ ion-header {
     background: var(--ion-color-primary);
     height: 25vh;
     width: 100%;    
+    z-index: 10;
 }
 
 .headerLogo {
@@ -11,3 +12,15 @@ ion-header {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.Backbutton{
+z-index: 100;
+position: relative;
+display: block !important;
+color: red;
+overflow: visible !important;
+visibility: visible !important;
+
+
+}
+

@@ -12,12 +12,11 @@ import {
     IonTextarea,
     IonAvatar
   } from "@ionic/react";
-  import "../style/Sign.css";
+  import "../style/Signup.css";
   import Header from "../components/Header";
   import {useState} from "react";
   import dbT from "../service/service.jsx";
   import camera from "../service/cam.jsx";
-
 
 
   export default function PostForm() {
@@ -85,10 +84,6 @@ import {
                 </div>
             </form>
         </div>
-        
-        
-    
-    
         </>
     );
   }
