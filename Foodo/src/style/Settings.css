@@ -1,0 +1,28 @@
+.settingsCenter {
+  justify-content: center;
+}
+
+.settingsImgRow {
+  position: relative;
+  margin-top: -50px;
+  z-index: 19;
+}
+
+.settingsDivider {
+  border-bottom: 1px solid black;
+  width: 100%;
+  display: inline-block;
+}
+
+.settingsUserInfo {
+  flex-direction: column;
+}
+
+.loginDeleteBtn {
+  justify-content: end;
+}
+
+.loginDeleteBtn ion-button {
+  color: var(--ion-color-danger);
+  --background: none;
+}

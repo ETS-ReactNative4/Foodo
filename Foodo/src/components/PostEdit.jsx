@@ -9,6 +9,7 @@ export default function PostEdit({ post, handleSubmit }) {
     event.preventDefault();
     const formData = { title: title, body: body };
     handleSubmit(formData);
+    
   }
 
   useEffect(() => {

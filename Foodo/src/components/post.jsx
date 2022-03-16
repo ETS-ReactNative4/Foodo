@@ -20,6 +20,7 @@ export default function Post({ post }) {
     dbT.updatePost(post.key, postToUpdate);
     console.log(post.key);
     console.log(postToUpdate);
+    setIsShow(false);
   }
 
   return (
