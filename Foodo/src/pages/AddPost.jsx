@@ -21,7 +21,7 @@ import { IonContent,
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import dbT from "../service/service.jsx";
-import { Camera, CameraResultType } from '@capacitor/camera';
+import camera from "../service/cam.jsx";
 import { Geolocation } from '@capacitor/geolocation';
 
 // import { Camera, CameraResultType } from "@capacitor/camera";
@@ -37,7 +37,11 @@ export default function PostForm({ post, handleSubmit }) {
     const [locale, setLocale] = useState("");
     const [country, setCountry] = useState("");
     // const [imageFile, setImageFile] = useState({});
-
+    
+    async function savePicture(){
+        const img = await camera.getPicture();
+        setImage(img);
+    } 
     
 
 const printCurrentPosition = async () => {
@@ -67,24 +71,7 @@ const getLocation = async (lo, la) => {
     console.log(country);
 }
 
-    const takePicture = async () => {
-        const image = await Camera.getPhoto({
-          quality: 90,
-          allowEditing: true,
-          resultType: CameraResultType.Uri
-        });
-      
-        // image.webPath will contain a path that can be set as an image src.
-        // You can access the original file using image.path, which can be
-        // passed to the Filesystem API to read the raw data of the image,
-        // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
-        const imageUrl = image.webPath;
-        setImage(imageUrl);
-        console.log(imageUrl);
-      
-        // Can be set to the src of an image now
-        //imageElement.src = imageUrl;
-      };
+    
 
     useEffect(() => {
         if (post) {
@@ -144,7 +131,7 @@ const getLocation = async (lo, la) => {
             </IonItem>
 <img src={image ? image: "https://media.istockphoto.com/photos/white-paper-texture-background-picture-id1293996796?b=1&k=20&m=1293996796&s=170667a&w=0&h=ot-Q4dcJynVUxQyjU5P7i4qPZxmoWmPC0M09R53D8j8="} alt="pic"/>
 
-            <IonButton onClick={takePicture}>
+            <IonButton onClick={savePicture}>
         picture
         </IonButton>
 
