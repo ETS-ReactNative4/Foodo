@@ -61,7 +61,7 @@ class Db{
              body: JSON.stringify(post)
          });
          const data = await response.json();
-         this.posts.push(data);
+         //this.posts.push(data);
          console.log(data);
      }
 

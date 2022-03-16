@@ -24,6 +24,7 @@ import dbT from "../service/service.jsx";
 import camera from "../service/cam.jsx";
 import { Geolocation } from '@capacitor/geolocation';
 
+
 // import { Camera, CameraResultType } from "@capacitor/camera";
 // import { camera } from "ionicons/icons";
 

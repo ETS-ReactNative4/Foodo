@@ -26,6 +26,8 @@ export default function Home() {
     return postsArray;
   }
 
+  
+
   useIonViewWillEnter(async () => {
     const p = await postsArr();
     setPosts(p);

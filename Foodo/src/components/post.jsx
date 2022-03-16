@@ -27,7 +27,10 @@ export default function Post({ post }) {
       <IonCard className="cardContainer">
         <PostActionsMenu post={post.key} handleIsShow={setIsShow} />
         <IonCardHeader>
-          <img src={post.url} alt="" />
+          <img
+            src={post.url}
+            alt=""
+          />
         </IonCardHeader>
         <IonCardContent>
           <IonRow className="postCardRow" size="12">
