@@ -26,7 +26,7 @@ export default function Post({post}) {
         <PostActionsMenu post={post.key} />
         <IonCardHeader>
           <img
-            src={post.postImg}
+            src={post.url}
             alt=""
           />
         </IonCardHeader>
