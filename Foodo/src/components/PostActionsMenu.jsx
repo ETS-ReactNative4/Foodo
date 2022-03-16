@@ -18,7 +18,7 @@ export default function PostActionMenu({ post }) {
 
   async function deletePost() {
     setIsOpen(false);
-    await dbT.deletePost(post);
+    dbT.deletePost(post);
     console.log("post deleted");
     console.log(post);
   }
@@ -34,9 +34,9 @@ export default function PostActionMenu({ post }) {
             <Link to="#" className="menuNavLinks" onClick={() => editPost()}>
               Edit
             </Link>
-            <Link to="#" className="menuNavLinks" onClick={deletePost}>
+            <IonButton to="#" className="menuNavLinks" onClick={deletePost} role="destructive" type="button">
               Delete
-            </Link>
+            </IonButton>
           </ul>
         </div>
       </div>

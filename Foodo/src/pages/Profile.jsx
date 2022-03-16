@@ -20,13 +20,15 @@ export default function Profile() {
   useEffect(() => {
     //load posts with user
     async function loadUserPosts() {
-      const postsArr = Object.keys(dbT.getPost).map((key) => ({
+      const p = await dbT.getPost();
+      const u = await dbT.getUser();
+      const postsArr = Object.keys(p).map((key) => ({
         id: key,
-        ...dbT.getPost[key],
+        ...p[key],
       }));
-      const userArr = Object.keys(dbT.getUser).map((key) => ({
+      const userArr = Object.keys(u).map((key) => ({
         id: key,
-        ...dbT.getUser[key],
+        ...u[key],
       }));
       const postsWithUser = postsArr.map((post) => {
         const user = userArr.find((user) => user.id === post.uid);
@@ -42,6 +44,8 @@ export default function Profile() {
     }
     loadUserPosts();
     loadUser();
+    console.log(posts);
+
   }, []);
 
   return (

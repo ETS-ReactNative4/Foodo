@@ -9,12 +9,21 @@ import {
 import "../style/Post.css";
 import User from "./User";
 import PostActionsMenu from "./PostActionsMenu";
+import PostEdit from "./PostEdit";
+import dbT from "../service/service";
 
 export default function Post({post}) {
+
+  async function updatePost(postToUpdate){
+    await dbT.updatePost(post, postToUpdate);
+    console.log(post);
+    console.log(postToUpdate);
+  }
+
   return (
     <>
       <IonCard className="cardContainer">
-        <PostActionsMenu post={post.id} />
+        <PostActionsMenu post={post.key} />
         <IonCardHeader>
           <img
             src={post.postImg}
@@ -37,6 +46,7 @@ export default function Post({post}) {
             {post.body}
           </IonRow>
         </IonCardContent>
+        <PostEdit post={post.key} handleSubmit={updatePost}/>
       </IonCard>
     </>
   );

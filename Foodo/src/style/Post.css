@@ -1,5 +1,6 @@
 ion-card.cardContainer {
   position: relative;
+  width: 90%;
 }
 
 ion-card-content {

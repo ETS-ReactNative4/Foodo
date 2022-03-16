@@ -19,15 +19,17 @@ export default function Home() {
     const data = await dbT.getPost();
     // map object into an array with objects
     const postsArray = Object.keys(data).map((key) => ({
-      id: key,
+      key: key,
       ...data[key],
     }));
+    
     return postsArray;
   }
 
   useIonViewWillEnter(async () => {
     const p = await postsArr();
     setPosts(p);
+    console.log(p);
 });
 
   return (
@@ -35,7 +37,7 @@ export default function Home() {
       <Header />
       <IonContent fullscreen>
         {posts.map((post) => (
-          <Post post={post} key={post.id} />
+          <Post post={post} key={post.key} />
         ))}
       </IonContent>
     </IonPage>
