@@ -8,15 +8,14 @@ import {
 } from "@ionic/react";
 import "../style/Post.css";
 import User from "./User";
+import dbT from "../service/service.jsx";
 import PostActionsMenu from "./PostActionsMenu";
 import PostEdit from "./PostEdit";
-import dbT from "../service/service";
 
-export default function Post({post}) {
-
-  async function updatePost(postToUpdate){
-    await dbT.updatePost(post, postToUpdate);
-    console.log(post);
+export default function Post({ post }) {
+  async function updatePost(postToUpdate) {
+    dbT.updatePost(post.key, postToUpdate);
+    console.log(post.key);
     console.log(postToUpdate);
   }
 
@@ -25,10 +24,7 @@ export default function Post({post}) {
       <IonCard className="cardContainer">
         <PostActionsMenu post={post.key} />
         <IonCardHeader>
-          <img
-            src={post.postImg}
-            alt=""
-          />
+          <img src={post.postImg} alt="" />
         </IonCardHeader>
         <IonCardContent>
           <IonRow className="postCardRow" size="12">
@@ -36,17 +32,19 @@ export default function Post({post}) {
               <IonCardTitle>{post.title}</IonCardTitle>
             </IonCol>
             <IonCol size="6">
-              <User userId = {post.uid} postLocale = {post.locale} postCountry = {post.country}/>
+              <User
+                userId={post.uid}
+                postLocale={post.locale}
+                postCountry={post.country}
+              />
             </IonCol>
           </IonRow>
           <IonRow className="postCardRow">
             <div className="divider"></div>
           </IonRow>
-          <IonRow className="postCardRow">
-            {post.body}
-          </IonRow>
+          <IonRow className="postCardRow">{post.body}</IonRow>
         </IonCardContent>
-        <PostEdit post={post.key} handleSubmit={updatePost}/>
+        <PostEdit post={post.key} handleSubmit={updatePost} />
       </IonCard>
     </>
   );
