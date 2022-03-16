@@ -5,18 +5,18 @@ export default function PostEdit({ post, handleSubmit }) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
+  function submitEvent(event) {
+    event.preventDefault();
+    const formData = { title: title, body: body };
+    handleSubmit(formData);
+  }
+
   useEffect(() => {
     if (post) {
       setTitle(post.title);
       setBody(post.body);
     }
   }, [post]);
-
-  function submitEvent(event) {
-    event.preventDefault();
-    const formData = { title: title, body: body };
-    handleSubmit(formData);
-  }
 
   return (
     <>
