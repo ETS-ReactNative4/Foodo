@@ -35,6 +35,7 @@ import { async } from "@firebase/util";
     const [password, setPassword] = useState("");
     const [rPassword, setRPassword] = useState("");
     const [image, setImage] = useState("");
+    const [id, setId] = useState("");
    
 
     async function savePicture(){
@@ -44,7 +45,8 @@ import { async } from "@firebase/util";
 
     async function signUpHandler(event){
           event.preventDefault();
-          const id = await dbT.createUser(mail, image);
+          const idT = await dbT.createUser(mail, image);
+          setId(idT);
           await dbT.createLogin(mail, password, id);
         }
     return (

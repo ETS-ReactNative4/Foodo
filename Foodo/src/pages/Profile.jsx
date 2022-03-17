@@ -23,27 +23,13 @@ export default function Profile() {
     async function loadUserPosts() {
       const p = await dbT.getPost();
       const u = await dbT.getUser();
-      const postsArr = Object.keys(p).map((key) => ({
-        id: key,
-        ...p[key],
-      }));
-      const userArr = Object.keys(u).map((key) => ({
-        id: key,
-        ...u[key],
-      }));
-      const postsWithUser = postsArr.map((post) => {
-        const user = userArr.find((user) => user.id === post.uid);
-        post = { ...post, user: user };
-        return post;
-      });
-      setPosts(postsWithUser);
     }
-    //load user
+    
     async function loadUser() {
-      const users = uc.getLoggedUser();
+      const users = await uc.getLoggedUser();
       setUser(users);
     }
-    loadUserPosts();
+    
     loadUser();
     console.log(posts);
 
