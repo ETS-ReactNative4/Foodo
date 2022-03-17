@@ -27,14 +27,17 @@
   --background: none;
 }
 
-.settingsUsernameNav {
+.settingsUserNav {
   display: none;
-  top: 100%;
-  right: 0;
-  border: 1px solid black;
-  box-shadow: 0 16px 24px 2px black;
 }
 
 .showUserEdit{
   display: block;
 }
+
+.settingsUser{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+}
+

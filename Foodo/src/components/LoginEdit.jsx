@@ -1,20 +1,20 @@
 import { IonItem, IonInput, IonLabel, IonButton } from "@ionic/react";
 import { useEffect, useState } from "react";
 
-export default function UserEdit({ user, handleSubmit }) {
-  const [username, setUsername] = useState("");
+export default function EmailEdit({ userEmail, handleSubmit }) {
+  const [email, setEmail] = useState("");
 
   function submitEvent(event) {
     event.preventDefault();
-    const formData = { username: username };
+    const formData = { email: email };
     handleSubmit(formData);
   }
 
   useEffect(() => {
-    if (user) {
-      setUsername(user.username);
+    if (userEmail) {
+      setEmail(userEmail.email);
     }
-  }, [user]);
+  }, [userEmail]);
 
   return (
     <>
@@ -22,9 +22,10 @@ export default function UserEdit({ user, handleSubmit }) {
         <IonItem>
           <IonLabel>Edit Title</IonLabel>
           <IonInput
-            value={username}
-            onIonChange={(e) => setUsername(e.target.value)}
-            placeholder="username"
+            type="email"
+            value={email}
+            onIonChange={(e) => setEmail(e.target.value)}
+            placeholder="email"
           ></IonInput>
         </IonItem>
         <IonButton type="submit">Update</IonButton>
