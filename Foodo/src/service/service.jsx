@@ -24,6 +24,7 @@ class Db {
   async fetchUser() {
     const response = await fetch(this.userUrl + ".json");
     const data = await response.json();
+    
     // console.log(data);
     this.users = data;
   }
@@ -69,10 +70,11 @@ class Db {
   }
 
   async createUser(username, profileImg) {
+    const id = Date.now();
     const user = {
       username: username,
       profileImg: profileImg,
-      id: Date.now(),
+      id: id,
       
     };
     const response = await fetch(this.userUrl + ".json", {
@@ -82,7 +84,8 @@ class Db {
     const data = await response.json();
     this.users.push(data);
     console.log(data);
-    return data.id;
+    
+    return id;
   }
 
   async createLogin(email, password, uid) {
