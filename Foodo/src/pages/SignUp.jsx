@@ -14,7 +14,7 @@ import {
     IonTabButton,
     IonIcon
   } from "@ionic/react";
-  import "../style/Signup.css";
+  import "../style/SignUp.css";
   import Header from "../components/Header";
   import {useState} from "react";
   import dbT from "../service/service.jsx";
@@ -44,12 +44,6 @@ import {
     async function signUpHandler(event){
           event.preventDefault();
           
-          
-        
-
-    
-
-
           
           createUserWithEmailAndPassword(auth, mail, password)
             .then((userCredential) => {
