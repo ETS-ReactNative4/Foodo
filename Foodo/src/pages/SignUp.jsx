@@ -38,25 +38,8 @@ import {
 
     async function signUpHandler(event){
           event.preventDefault();
-          
-          
-        
-
-    
-
-
-          
-          createUserWithEmailAndPassword(auth, mail, password)
-            .then((userCredential) => {
-              // Signed in 
-              const user = userCredential.user;
-              // ...
-            })
-            .catch((error) => {
-              const errorCode = error.code;
-              const errorMessage = error.message;
-              // ..
-            });
+          const id = await dbT.createUser(mail, image);
+          await dbT.createLogin(mail, password, id);
         }
     return (
         <>
