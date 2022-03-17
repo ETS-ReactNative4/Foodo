@@ -27,36 +27,45 @@ import dbT from "../service/service.jsx";
 import camera from "../service/cam.jsx";
 import { Geolocation } from "@capacitor/geolocation";
 import "../style/AddPost.css";
+import uc from "../service/userControl.jsx";
+import { getIdToken } from "@firebase/auth";
+import { isEmpty } from "@firebase/util";
 
 // import { Camera, CameraResultType } from "@capacitor/camera";
 // import { camera } from "ionicons/icons";
 
 export default function PostForm({ post, handleSubmit }) {
-  const history = useHistory();
-  const [title, setTitle] = useState("");
-  const [Description, setDescription] = useState("");
-  const [image, setImage] = useState("");
+    const history = useHistory();
+    const [title, setTitle] = useState("");
+    const [Description, setDescription] = useState("");
+    const [image, setImage] = useState("");
+    const [currentUser, setCurrentUser] = useState("");
+  
+    const [locale, setLocale] = useState("");
+    const [country, setCountry] = useState("");
+    // const [imageFile, setImageFile] = useState({});
+    
+    async function savePicture(){
+        const img = await camera.getPicture();
+        setImage(img);
+    } 
+    
 
-  const [locale, setLocale] = useState("");
-  const [country, setCountry] = useState("");
-  // const [imageFile, setImageFile] = useState({});
+const printCurrentPosition = async () => {
+  const coordinates = await Geolocation.getCurrentPosition();
+  const lo = coordinates.coords.longitude;
+  const la = coordinates.coords.latitude;
+  console.log('Current position:', coordinates);
+  
 
-  async function savePicture() {
-    const img = await camera.getPicture();
-    setImage(img);
-  }
+  await getLocation(lo, la);
+  
+};
 
-  const printCurrentPosition = async () => {
-    const coordinates = await Geolocation.getCurrentPosition();
-    const lo = coordinates.coords.longitude;
-    const la = coordinates.coords.latitude;
-    console.log("Current position:", coordinates);
-
-    await getLocation(lo, la);
-  };
-
-  const getLocation = async (lo, la) => {
-    const key = "cd0394416d67f2b60cde05246ddd3b89";
+const getLocation = async (lo, la) => {
+    
+    
+    const key = 'cd0394416d67f2b60cde05246ddd3b89';
     const url = `http://api.positionstack.com/v1/reverse?access_key=${key}&query=${la},${lo}&limit=1`;
     console.log(url);
     const response = await fetch(url);
@@ -67,14 +76,45 @@ export default function PostForm({ post, handleSubmit }) {
     setCountry(data.data[0].country);
 
     console.log(country);
-  };
+}
+   
+    
 
-  useEffect(() => {
-    if (post) {
-      setTitle(post.title);
-      setDescription(post.Description);
+    useEffect(() => {
+        const getId=async() => {
+            setCurrentUser(await uc.getUserKey());
+        }
+        
+        if (post) {
+            setTitle(post.title);
+            setDescription(post.Description);
+            
+            
 
-      // setImage(post.image);
+            // setImage(post.image);
+        }
+        getId();
+    }, [post]);
+
+   
+        
+    
+
+    
+
+    function submitEvent(event) {
+        event.preventDefault();
+        
+       
+        console.log('Virk', currentUser);
+        //const formData = { title: title, Description: Description };
+        //handleSubmit(formData);
+        if(title != null && Description != null && !isEmpty(currentUser)){
+          
+        dbT.createPost(title, Description, image, currentUser, country, locale);
+        console.log('User', currentUser);
+        //history.replace('/home');
+        }
     }
   }, [post]);
 
@@ -91,7 +131,8 @@ export default function PostForm({ post, handleSubmit }) {
     //     const image = await Camera.getPhoto(imageOptions);
     //     setImageFile(image);
     //     setImage(image.dataUrl);
-    }
+    // }
+    
     return (
         <>
         <form onSubmit={submitEvent}>
