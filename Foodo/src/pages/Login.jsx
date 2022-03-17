@@ -14,11 +14,23 @@ import {
   import "../style/Sign.css";
   import Header from "../components/Header";
   import {useState} from "react";
+  import uc from "../service/userControl";
+  import { useHistory } from "react-router";
+
+  
 
 
-  export default function PostForm({ }) {
+  export default function PostForm() {
+    const history = useHistory();
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
+
+    async function submitHandler(event){
+        event.preventDefault();
+       if(await uc.login(mail, password)){
+       history.replace('/home');
+    }
+    }
 
     return (
         <>
@@ -26,7 +38,7 @@ import {
        <h2 className="SignH2">Login</h2>
         <div className="SignForm">
            
-            <form >
+            <form onSubmit={submitHandler}>
                 
                 <IonItem>
                     

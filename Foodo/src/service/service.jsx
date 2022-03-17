@@ -73,6 +73,7 @@ class Db {
       username: username,
       profileImg: profileImg,
       id: Date.now(),
+      
     };
     const response = await fetch(this.userUrl + ".json", {
       method: "POST",
@@ -81,6 +82,7 @@ class Db {
     const data = await response.json();
     this.users.push(data);
     console.log(data);
+    return data.id;
   }
 
   async createLogin(email, password, uid) {

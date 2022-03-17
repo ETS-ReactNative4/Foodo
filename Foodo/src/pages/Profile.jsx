@@ -12,6 +12,7 @@ import Header from "../components/Header";
 import dbT from "../service/service.jsx";
 import { useEffect, useState } from "react";
 import Post from "../components/post";
+import uc from "../service/userControl";
 
 export default function Profile() {
   const [user, setUser] = useState([]);
@@ -39,7 +40,7 @@ export default function Profile() {
     }
     //load user
     async function loadUser() {
-      const users = await dbT.getSingleUser(2);
+      const users = uc.getLoggedUser();
       setUser(users);
     }
     loadUserPosts();
