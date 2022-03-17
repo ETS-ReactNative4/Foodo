@@ -91,45 +91,38 @@ export default function PostForm({ post, handleSubmit }) {
     //     const image = await Camera.getPhoto(imageOptions);
     //     setImageFile(image);
     //     setImage(image.dataUrl);
-  }
-  return (
-    <>
-      <form onSubmit={submitEvent}>
-        <IonItem>
-          <IonLabel position="stacked">Title</IonLabel>
-          <IonInput
-            value={title}
-            placeholder="Food title"
-            onIonChange={(e) => setTitle(e.target.value)}
-          />
-        </IonItem>
-        <IonItem>
-          <IonLabel position="stacked">Food description</IonLabel>
-          <IonTextarea
-            value={Description}
-            placeholder="Tell us about your food"
-            onIonChange={(e) => setDescription(e.target.value)}
-          ></IonTextarea>
-        </IonItem>
-        <img
-          src={
-            image
-              ? image
-              : "https://media.istockphoto.com/photos/white-paper-texture-background-picture-id1293996796?b=1&k=20&m=1293996796&s=170667a&w=0&h=ot-Q4dcJynVUxQyjU5P7i4qPZxmoWmPC0M09R53D8j8="
-          }
-          alt="pic"
-        />
+    }
+    return (
+        <>
+        <form onSubmit={submitEvent}>
+            <IonItem>
+                <IonLabel position="stacked">Title</IonLabel>
+                <IonInput
+                    value={title}
+                    placeholder="Food title"
+                    onIonChange={e => setTitle(e.target.value)}
+                />
+            </IonItem>
+            <IonItem>
+                <IonLabel position="stacked">Food description</IonLabel>
+                <IonTextarea
+                    value={Description}
+                    placeholder="Tell us about your food"
+                    onIonChange={e => setDescription(e.target.value)}></IonTextarea>
+            </IonItem>
+<img src={image ? image: "https://media.istockphoto.com/photos/white-paper-texture-background-picture-id1293996796?b=1&k=20&m=1293996796&s=170667a&w=0&h=ot-Q4dcJynVUxQyjU5P7i4qPZxmoWmPC0M09R53D8j8="} alt="pic"/>
 
-        <div className="AddIcons">
-          <IonTabButton tab={savePicture}>
-            <IonIcon icon={cameraOutline} />
-          </IonTabButton>
-          <IonTabButton tab={printCurrentPosition}>
-            <IonIcon icon={navigateOutline} />
-          </IonTabButton>
-        </div>
+            <div className="AddIcons">
+                <IonTabButton tab={savePicture} onClick={savePicture} >
+                    <IonIcon icon={cameraOutline} /> 
+                </IonTabButton>
+                <IonTabButton tab={printCurrentPosition} onClick={printCurrentPosition}>
+                    <IonIcon icon={navigateOutline} /> 
+                </IonTabButton>
+            </div>
 
-        {/* <IonItem onClick={takePicture} lines="none">
+     
+            {/* <IonItem onClick={takePicture} lines="none">
                 <IonLabel>Choose Image</IonLabel>
                 <IonButton>
                     <IonIcon slot="icon-only" icon={camera} />

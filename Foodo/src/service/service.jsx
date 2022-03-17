@@ -19,13 +19,18 @@ class Db {
     }
     console.log(this.posts);
     return this.posts;
+
+    
   }
 
   async fetchUser() {
     const response = await fetch(this.userUrl + ".json");
     const data = await response.json();
+    
     // console.log(data);
     this.users = data;
+
+    
   }
 
   async getUser() {
@@ -68,11 +73,14 @@ class Db {
     console.log(data);
   }
 
-  async createUser(username, profileImg) {
+  async createUser(username, profileImg, email, password) {
+    const id = Date.now();
     const user = {
       username: username,
       profileImg: profileImg,
-      id: Date.now(),
+      id: id,
+      email: email,
+      password: password,
       
     };
     const response = await fetch(this.userUrl + ".json", {
@@ -82,7 +90,8 @@ class Db {
     const data = await response.json();
     this.users.push(data);
     console.log(data);
-    return data.id;
+    
+    return id;
   }
 
   async createLogin(email, password, uid) {
@@ -134,6 +143,7 @@ class Db {
       await this.fetchUser();
     }
     const user = this.users[id];
+    console.log(this.users);
     return user;
   }
 

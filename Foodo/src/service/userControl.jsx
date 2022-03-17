@@ -16,16 +16,19 @@ class userControl{
               ...data[key],
             }));
             
-         
+            
           
 
         console.log(userLogin);
         for(const login of userLogin){
             if(login.email == mail && login.password == pass){
-                this.loggedUser = await dbT.getSingleUser(login.uid);
-                localStorage.setItem("user", this.loggedUser);
+                this.loggedUser = await dbT.getSingleUser(login.id);
+               
                 console.log('succes:', this.loggedUser);
-                return this.loggedUser;
+              //  const user = JSON.stringify(this.loggedUser);
+                //localStorage.setItem("user", user);
+                
+                
             }else{
                 console.log('failure');
             }
@@ -33,9 +36,11 @@ class userControl{
 
     }
 
-    getLoggedUser(){
-        const user = localStorage.getItem("user");
-        console.log(localStorage.getItem("user"));
+    async getLoggedUser(){
+        
+        const user = await JSON.parse(localStorage.getItem("user"));
+        console.log(user);
+        
         return user;
     }
 
