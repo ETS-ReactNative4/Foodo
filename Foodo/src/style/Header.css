@@ -13,14 +13,11 @@ ion-header {
     transform: translate(-50%, -50%);
 }
 
-.Backbutton{
-z-index: 100;
-position: relative;
-display: block !important;
+.backbutton{
+position: absolute;
+top:-30%;
+background-color: #747EFD;
+width: 20%;
 color: red;
-overflow: visible !important;
-visibility: visible !important;
-
-
 }
 

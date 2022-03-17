@@ -9,7 +9,8 @@ import {
     IonItem,
     IonLabel,
     IonInput,
-    IonTextarea
+    IonTextarea,
+    IonIcon
   } from "@ionic/react";
   import "../style/Sign.css";
   import Header from "../components/Header";
@@ -24,6 +25,7 @@ import {
         <>
         <Header />
        <h2 className="SignH2">Login</h2>
+    
         <div className="SignForm">
            
             <form >
@@ -49,6 +51,7 @@ import {
                     <IonButton type="submit" expand="block" color="secondary">
                         Login
                     </IonButton>
+                    
 
                 </div>
             </form>
