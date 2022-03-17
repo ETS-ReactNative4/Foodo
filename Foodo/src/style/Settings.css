@@ -26,3 +26,15 @@
   color: var(--ion-color-danger);
   --background: none;
 }
+
+.settingsUsernameNav {
+  display: none;
+  top: 100%;
+  right: 0;
+  border: 1px solid black;
+  box-shadow: 0 16px 24px 2px black;
+}
+
+.showUserEdit{
+  display: block;
+}
