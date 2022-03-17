@@ -11,10 +11,10 @@ import {
     IonInput,
     IonTextarea,
     IonAvatar,
-    IonTabButton,
-    IonIcon
+    IonIcon,
+    IonTabButton
   } from "@ionic/react";
-  import "../style/SignUp.css";
+  import "../style/Signup.css";
   import Header from "../components/Header";
   import {useState} from "react";
   import dbT from "../service/service.jsx";
@@ -84,8 +84,8 @@ import { async } from "@firebase/util";
                 <img src={image ? image: "https://media.istockphoto.com/photos/white-paper-texture-background-picture-id1293996796?b=1&k=20&m=1293996796&s=170667a&w=0&h=ot-Q4dcJynVUxQyjU5P7i4qPZxmoWmPC0M09R53D8j8="} alt="pic"/>
                 </IonAvatar>
                 
-                <IonTabButton onClick={savePicture}>
-                    <IonIcon icon={cameraOutline} />
+                <IonTabButton tab={savePicture} >
+                    <IonIcon icon={cameraOutline} /> 
                 </IonTabButton>
                 <div className="ion-padding">
                     <IonButton type="submit" expand="block" color="secondary" >

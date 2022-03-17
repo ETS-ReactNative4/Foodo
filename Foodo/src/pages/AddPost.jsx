@@ -15,14 +15,16 @@ import { IonContent,
     IonIcon,
     IonLabel,
     IonButton,
-  
+    IonTabButton,
     useIonViewDidEnter,
     useIonViewWillEnter, } from "@ionic/react";
 import { useState, useEffect } from "react";
+import { cameraOutline, navigateOutline} from 'ionicons/icons';
 import { useHistory } from "react-router";
 import dbT from "../service/service.jsx";
 import camera from "../service/cam.jsx";
 import { Geolocation } from '@capacitor/geolocation';
+import "../style/AddPost.css";
 
 
 // import { Camera, CameraResultType } from "@capacitor/camera";
@@ -132,13 +134,16 @@ const getLocation = async (lo, la) => {
             </IonItem>
 <img src={image ? image: "https://media.istockphoto.com/photos/white-paper-texture-background-picture-id1293996796?b=1&k=20&m=1293996796&s=170667a&w=0&h=ot-Q4dcJynVUxQyjU5P7i4qPZxmoWmPC0M09R53D8j8="} alt="pic"/>
 
-            <IonButton onClick={savePicture}>
-        picture
-        </IonButton>
+            <div className="AddIcons">
+                <IonTabButton tab={savePicture} >
+                    <IonIcon icon={cameraOutline} /> 
+                </IonTabButton>
+                <IonTabButton tab={printCurrentPosition} >
+                    <IonIcon icon={navigateOutline} /> 
+                </IonTabButton>
+            </div>
 
-        <IonButton onClick={printCurrentPosition}>
-        GeoLocation
-        </IonButton>
+     
             {/* <IonItem onClick={takePicture} lines="none">
                 <IonLabel>Choose Image</IonLabel>
                 <IonButton>
