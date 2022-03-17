@@ -18,7 +18,7 @@ import {
   import dbT from "../service/service.jsx";
   import camera from "../service/cam.jsx";
   import { useHistory } from "react-router";
-  import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+  
   
 
 
@@ -29,7 +29,7 @@ import {
     const [password, setPassword] = useState("");
     const [rPassword, setRPassword] = useState("");
     const [image, setImage] = useState("");
-    const auth = getAuth();
+   
 
     async function savePicture(){
         const img = await camera.getPicture();
