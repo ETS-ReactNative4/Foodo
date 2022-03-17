@@ -16,14 +16,17 @@ import {
   IonIcon,
   IonLabel,
   IonButton,
+  IonTabButton,
   useIonViewDidEnter,
   useIonViewWillEnter,
 } from "@ionic/react";
 import { useState, useEffect } from "react";
+import { cameraOutline, navigateOutline } from "ionicons/icons";
 import { useHistory } from "react-router";
 import dbT from "../service/service.jsx";
 import camera from "../service/cam.jsx";
 import { Geolocation } from "@capacitor/geolocation";
+import "../style/AddPost.css";
 
 // import { Camera, CameraResultType } from "@capacitor/camera";
 // import { camera } from "ionicons/icons";
@@ -78,26 +81,17 @@ export default function PostForm({ post, handleSubmit }) {
   async function submitEvent(event) {
     event.preventDefault();
 
-    console.log(locale);
-    //const formData = { title: title, Description: Description };
-    //handleSubmit(formData);
-    if (title != null && Description != null) {
-      dbT.createPost(title, Description, image, 2, country, locale);
-      history.replace("/home");
-    }
+    // async function takePicture() {
+    //     const imageOptions = {
+    //         quality: 80,
+    //         width: 500,
+    //         allowEditing: true,
+    //         resultType: CameraResultType.DataUrl
+    //     };
+    //     const image = await Camera.getPhoto(imageOptions);
+    //     setImageFile(image);
+    //     setImage(image.dataUrl);
   }
-
-  // async function takePicture() {
-  //     const imageOptions = {
-  //         quality: 80,
-  //         width: 500,
-  //         allowEditing: true,
-  //         resultType: CameraResultType.DataUrl
-  //     };
-  //     const image = await Camera.getPhoto(imageOptions);
-  //     setImageFile(image);
-  //     setImage(image.dataUrl);
-  // }
   return (
     <>
       <form onSubmit={submitEvent}>
@@ -126,9 +120,15 @@ export default function PostForm({ post, handleSubmit }) {
           alt="pic"
         />
 
-        <IonButton onClick={savePicture}>picture</IonButton>
+        <div className="AddIcons">
+          <IonTabButton tab={savePicture}>
+            <IonIcon icon={cameraOutline} />
+          </IonTabButton>
+          <IonTabButton tab={printCurrentPosition}>
+            <IonIcon icon={navigateOutline} />
+          </IonTabButton>
+        </div>
 
-        <IonButton onClick={printCurrentPosition}>GeoLocation</IonButton>
         {/* <IonItem onClick={takePicture} lines="none">
                 <IonLabel>Choose Image</IonLabel>
                 <IonButton>
