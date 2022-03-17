@@ -23,6 +23,7 @@ class userControl{
         for(const login of userLogin){
             if(login.email == mail && login.password == pass){
                 this.loggedUser = await dbT.getSingleUser(login.uid);
+                localStorage.setItem("user", this.loggedUser);
                 console.log('succes:', this.loggedUser);
                 return this.loggedUser;
             }else{
@@ -33,7 +34,9 @@ class userControl{
     }
 
     getLoggedUser(){
-        return this.loggedUser;
+        const user = localStorage.getItem("user");
+        console.log(localStorage.getItem("user"));
+        return user;
     }
 
 }
