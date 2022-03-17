@@ -135,10 +135,10 @@ const getLocation = async (lo, la) => {
 <img src={image ? image: "https://media.istockphoto.com/photos/white-paper-texture-background-picture-id1293996796?b=1&k=20&m=1293996796&s=170667a&w=0&h=ot-Q4dcJynVUxQyjU5P7i4qPZxmoWmPC0M09R53D8j8="} alt="pic"/>
 
             <div className="AddIcons">
-                <IonTabButton tab={savePicture} >
+                <IonTabButton tab={savePicture} onClick={savePicture} >
                     <IonIcon icon={cameraOutline} /> 
                 </IonTabButton>
-                <IonTabButton tab={printCurrentPosition} >
+                <IonTabButton tab={printCurrentPosition} onClick={printCurrentPosition}>
                     <IonIcon icon={navigateOutline} /> 
                 </IonTabButton>
             </div>
