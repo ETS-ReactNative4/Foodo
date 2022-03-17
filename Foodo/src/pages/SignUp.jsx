@@ -17,14 +17,19 @@ import {
   import {useState} from "react";
   import dbT from "../service/service.jsx";
   import camera from "../service/cam.jsx";
+  import { useHistory } from "react-router";
+  import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+  
 
 
 
-  export default function PostForm() {
+  export default function SignUp() {
+    const history = useHistory();
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
     const [rPassword, setRPassword] = useState("");
     const [image, setImage] = useState("");
+    const auth = getAuth();
 
     async function savePicture(){
         const img = await camera.getPicture();
@@ -34,10 +39,25 @@ import {
     async function signUpHandler(event){
           event.preventDefault();
           
-          await dbT.createUser(mail, null);
-          await dbT.createLogin(mail, password);
-    }
+          
+        
 
+    
+
+
+          
+          createUserWithEmailAndPassword(auth, mail, password)
+            .then((userCredential) => {
+              // Signed in 
+              const user = userCredential.user;
+              // ...
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              // ..
+            });
+        }
     return (
         <>
         <Header />
@@ -92,4 +112,5 @@ import {
         </>
     );
   }
+  
   
