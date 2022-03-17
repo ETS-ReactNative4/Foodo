@@ -15,6 +15,7 @@ import { useState } from "react";
 
 export default function Post({ post }) {
   const [isShow, setIsShow] = useState(false);
+  console.log(post.uid);
 
   async function updatePost(postToUpdate) {
     dbT.updatePost(post.key, postToUpdate);

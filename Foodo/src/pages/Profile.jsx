@@ -54,10 +54,10 @@ export default function Profile() {
       <IonContent fullscreen className="profileContainer">
         <Header />
         <IonRow size="12" className="profileImgRow">
-          <img className="profileImg" src={user.profileImg} alt="" />
+          <img className="profileImg" src={user?.profileImg} alt="" />
         </IonRow>
         <IonRow size="12">
-          <h2>{user.username}</h2>
+          <h2>{user?.username}</h2>
         </IonRow>
         <IonRow size="12" className="profilePosts">
           <IonCol size="6">
@@ -71,7 +71,7 @@ export default function Profile() {
         </IonRow>
         <IonRow>
           {posts && posts.length > 0 ? (
-            posts.map((post) => <Post post={post} key={post.id} />)
+            posts?.map((post) => <Post post={post} key={post.id} />)
           ) : (
             <p>Loading...</p>
           )}

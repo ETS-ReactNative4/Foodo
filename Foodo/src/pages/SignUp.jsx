@@ -35,7 +35,6 @@ import { async } from "@firebase/util";
     const [password, setPassword] = useState("");
     const [rPassword, setRPassword] = useState("");
     const [image, setImage] = useState("");
-   
 
     async function savePicture(){
         const img = await camera.getPicture();
@@ -84,7 +83,7 @@ import { async } from "@firebase/util";
                 <img src={image ? image: "https://media.istockphoto.com/photos/white-paper-texture-background-picture-id1293996796?b=1&k=20&m=1293996796&s=170667a&w=0&h=ot-Q4dcJynVUxQyjU5P7i4qPZxmoWmPC0M09R53D8j8="} alt="pic"/>
                 </IonAvatar>
                 
-                <IonTabButton tab={savePicture} >
+                <IonTabButton tab={savePicture} onClick={savePicture} >
                     <IonIcon icon={cameraOutline} /> 
                 </IonTabButton>
                 <div className="ion-padding">
