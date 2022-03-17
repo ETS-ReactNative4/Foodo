@@ -8,7 +8,7 @@ export default function User({ userId, postLocale, postCountry }) {
 
   useEffect(() => {
     const userArr = async () => {
-      const u = await dbT.getSingleUser(userId);
+      const u = await dbT.getSingleUser('-MyMc4rqtKR3kFhoLW_L');
       setUser(u);
     };
     userArr();
