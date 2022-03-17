@@ -15,6 +15,7 @@ import { useState } from "react";
 
 export default function Post({ post }) {
   const [isShow, setIsShow] = useState(false);
+  console.log(post.uid);
 
   async function updatePost(postToUpdate) {
     dbT.updatePost(post.key, postToUpdate);
@@ -28,10 +29,7 @@ export default function Post({ post }) {
       <IonCard className="cardContainer">
         <PostActionsMenu post={post.key} handleIsShow={setIsShow} />
         <IonCardHeader>
-          <img
-            src={post.url}
-            alt=""
-          />
+          <img src={post.url} alt="" />
         </IonCardHeader>
         <IonCardContent>
           <IonRow className="postCardRow" size="12">

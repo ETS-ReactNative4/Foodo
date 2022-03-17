@@ -12,33 +12,55 @@ import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import { camera, brush } from "ionicons/icons";
 import UserEdit from "../components/UserEdit";
+import LoginEdit from "../components/LoginEdit";
+import photo from "../service/cam";
 
 export default function Settings({ userId }) {
   const [user, setUser] = useState([]);
   const [login, setLogin] = useState([]);
+  const [image, setImage] = useState("");
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isUsernameOpen, setIsUsernameOpen] = useState(false);
+  const [isEmailOpen, setIsEmailOpen] = useState(false);
 
   const handleToggle = () => {
-    setIsOpen((prev) => !prev);
+    setIsUsernameOpen((prev) => !prev);
+  };
+
+  const handleToggle2 = () => {
+    setIsEmailOpen((prev) => !prev);
+  };
+
+  const savePicture = async () => {
+    const img = await photo.getPicture();
+    setImage(img);
+    console.log(image);
   };
 
   async function updateUser(userToUpdate) {
-    dbT.updateUser(user.id, userToUpdate);
-    console.log(user.id);
+    await dbT.updateUser(user, userToUpdate);
+    console.log(user);
     console.log(userToUpdate);
     console.log("updateUser");
   }
 
+  async function updateEmail(loginToUpdate) {
+    await dbT.updateLogin(login.id, loginToUpdate);
+    console.log(login.id);
+    console.log(loginToUpdate);
+    console.log("updateEmail");
+    console.log(userId);
+  }
+
   useEffect(() => {
     async function loadUserLogin() {
-      const userLogin = await dbT.getSingleLogin(2);
+      const userLogin = await dbT.getSingleLogin("-MyMc4rqtKR3kFhoLW_L");
       setLogin(userLogin);
       console.log(userLogin);
     }
     //load user
     async function loadUser() {
-      const users = await dbT.getSingleUser(2);
+      const users = await dbT.getSingleUser("-MyMc4rqtKR3kFhoLW_L");
       setUser(users);
       console.log(users);
     }
@@ -51,10 +73,10 @@ export default function Settings({ userId }) {
       <IonContent fullscreen className="settingsContainer">
         <Header />
         <IonRow size="12" className="settingsImgRow settingsCenter">
-          <img className="profileImg" src={user.profileImg} alt="" />
+          <img className="profileImg" src={user?.profileImg} alt="" />
         </IonRow>
         <IonRow size="12" className="settingsCenter">
-          <h2>{user.username}</h2>
+          <h2>{user?.username}</h2>
         </IonRow>
         <IonRow className="settingsDivider"></IonRow>
         <IonRow>
@@ -63,26 +85,43 @@ export default function Settings({ userId }) {
         <IonRow className="settingsUserInfo">
           {/* Username */}
           <h4>Username:</h4>
-          <p>
-            {user.username}
+          <p className="settingsUser">
+            {user?.username}
             <IonButton onClick={handleToggle}>
               <IonIcon slot="icon-only" icon={brush}></IonIcon>
-              {isOpen ? "Close" : "Open"}
+              {isUsernameOpen ? "" : ""}
             </IonButton>
           </p>
-          <IonRow className={`settingsUsernameNav ${isOpen ? "showUserEdit" : ""}`}>
+          <IonRow
+            className={`settingsUserNav ${
+              isUsernameOpen ? "showUserEdit" : ""
+            }`}
+          >
             <UserEdit user={userId} handleSubmit={updateUser}></UserEdit>
           </IonRow>
           {/* Email */}
           <h4>Email:</h4>
-          <p>
-            {login.email}
-            <IonIcon slot="icon-only" icon={brush}></IonIcon>
+          <p className="settingsUser">
+            {login?.email}
+            <IonButton onClick={handleToggle2}>
+              <IonIcon slot="icon-only" icon={brush}></IonIcon>
+              {isEmailOpen ? "" : ""}
+            </IonButton>
           </p>
+          <IonRow
+            className={`settingsUserNav ${isEmailOpen ? "showUserEdit" : ""}`}
+          >
+            <LoginEdit
+              userEmail={userId}
+              handleSubmit={updateEmail}
+            ></LoginEdit>
+          </IonRow>
           <h4>
             {/* Profile img */}
             Change Profile Image
-            <IonIcon slot="icon-only" icon={camera}></IonIcon>
+            <IonButton onClick={savePicture}>
+              <IonIcon slot="icon-only" icon={camera}></IonIcon>
+            </IonButton>
           </h4>
         </IonRow>
         <IonRow className="loginDeleteBtn">

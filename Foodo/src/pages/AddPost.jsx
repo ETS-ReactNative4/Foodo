@@ -1,38 +1,38 @@
-import { IonContent,
-    IonHeader,
-    IonPage,
-    IonTitle,
-    IonToolbar,
-    IonCard,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
-    IonCardContent,
-    IonImg,
-    IonTextarea,
-    IonInput,
-    IonItem,
-    IonIcon,
-    IonLabel,
-    IonButton,
-    IonTabButton,
-    useIonViewDidEnter,
-    useIonViewWillEnter, } from "@ionic/react";
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonCard,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonCardContent,
+  IonImg,
+  IonTextarea,
+  IonInput,
+  IonItem,
+  IonIcon,
+  IonLabel,
+  IonButton,
+  IonTabButton,
+  useIonViewDidEnter,
+  useIonViewWillEnter,
+} from "@ionic/react";
 import { useState, useEffect } from "react";
-import { cameraOutline, navigateOutline} from 'ionicons/icons';
+import { cameraOutline, navigateOutline } from "ionicons/icons";
 import { useHistory } from "react-router";
 import dbT from "../service/service.jsx";
 import camera from "../service/cam.jsx";
-import { Geolocation } from '@capacitor/geolocation';
+import { Geolocation } from "@capacitor/geolocation";
 import "../style/AddPost.css";
 import uc from "../service/userControl.jsx";
 import { getIdToken } from "@firebase/auth";
 import { isEmpty } from "@firebase/util";
 
-
 // import { Camera, CameraResultType } from "@capacitor/camera";
 // import { camera } from "ionicons/icons";
-
 
 export default function PostForm({ post, handleSubmit }) {
     const history = useHistory();
@@ -74,7 +74,7 @@ const getLocation = async (lo, la) => {
     console.log(data.data[0].administrative_area);
     setLocale(data.data[0].administrative_area);
     setCountry(data.data[0].country);
-    
+
     console.log(country);
 }
    
@@ -116,6 +116,10 @@ const getLocation = async (lo, la) => {
         //history.replace('/home');
         }
     }
+  }, [post]);
+
+  async function submitEvent(event) {
+    event.preventDefault();
 
     // async function takePicture() {
     //     const imageOptions = {
@@ -165,19 +169,14 @@ const getLocation = async (lo, la) => {
                     <IonIcon slot="icon-only" icon={camera} />
                 </IonButton>npm install @ionic/pwa-elements
             </IonItem> */}
-            {/* {image && <IonImg className="ion-padding" src={image} onClick={takePicture} />} */}
+        {/* {image && <IonImg className="ion-padding" src={image} onClick={takePicture} />} */}
 
-            <div className="ion-padding">
-                <IonButton type="submit" expand="block" color="secondary">
-                    Save
-                </IonButton>
-
-            </div>
-        </form>
-        
-        
-    
-    
-        </>
-    );
+        <div className="ion-padding">
+          <IonButton type="submit" expand="block" color="secondary">
+            Save
+          </IonButton>
+        </div>
+      </form>
+    </>
+  );
 }

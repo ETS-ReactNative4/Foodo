@@ -12,6 +12,7 @@ export default function User({ userId, postLocale, postCountry }) {
       setUser(u);
     };
     userArr();
+
   }, []);
 
   return (
