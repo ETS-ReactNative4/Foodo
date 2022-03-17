@@ -16,13 +16,13 @@ class userControl{
               ...data[key],
             }));
             
-         
+            
           
 
         console.log(userLogin);
         for(const login of userLogin){
             if(login.email == mail && login.password == pass){
-                this.loggedUser = await dbT.getSingleUser(login.uid);
+                this.loggedUser = await dbT.getSingleUser(login.id);
                
                 console.log('succes:', this.loggedUser);
               //  const user = JSON.stringify(this.loggedUser);
