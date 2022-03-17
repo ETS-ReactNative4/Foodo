@@ -27,10 +27,6 @@ export default function Settings({ userId }) {
     setIsUsernameOpen((prev) => !prev);
   };
 
-  const handleToggle2 = () => {
-    setIsEmailOpen((prev) => !prev);
-  };
-
   const savePicture = async () => {
     const img = await photo.getPicture();
     setImage(img);
@@ -39,33 +35,34 @@ export default function Settings({ userId }) {
 
   async function updateUser(userToUpdate) {
     await dbT.updateUser(user, userToUpdate);
-    console.log(user);
+    console.log(user.id);
     console.log(userToUpdate);
     console.log("updateUser");
-  }
-
-  async function updateEmail(loginToUpdate) {
-    await dbT.updateLogin(login.id, loginToUpdate);
-    console.log(login.id);
-    console.log(loginToUpdate);
-    console.log("updateEmail");
     console.log(userId);
   }
 
+  async function deleteUser() {
+    // dbT.deletePost(user.id);
+    console.log("user deleted");
+    console.log(user.id);
+  }
+
+  const userKey = "-MyMz-aRRU9knsrC4vFb";
+
   useEffect(() => {
-    async function loadUserLogin() {
-      const userLogin = await dbT.getSingleLogin("-MyMc4rqtKR3kFhoLW_L");
-      setLogin(userLogin);
-      console.log(userLogin);
-    }
+    // async function loadUserLogin() {
+    //   const userLogin = await dbT.getSingleLogin(userKey);
+    //   setLogin(userLogin);
+    //   console.log(userLogin);
+    // }
     //load user
     async function loadUser() {
-      const users = await dbT.getSingleUser("-MyMc4rqtKR3kFhoLW_L");
+      const users = await dbT.getSingleUser(userKey);
       setUser(users);
       console.log(users);
     }
     loadUser();
-    loadUserLogin();
+    // loadUserLogin();
   }, []);
 
   return (
@@ -100,7 +97,7 @@ export default function Settings({ userId }) {
             <UserEdit user={userId} handleSubmit={updateUser}></UserEdit>
           </IonRow>
           {/* Email */}
-          <h4>Email:</h4>
+          {/* <h4>Email:</h4>
           <p className="settingsUser">
             {login?.email}
             <IonButton onClick={handleToggle2}>
@@ -115,7 +112,7 @@ export default function Settings({ userId }) {
               userEmail={userId}
               handleSubmit={updateEmail}
             ></LoginEdit>
-          </IonRow>
+          </IonRow> */}
           <h4>
             {/* Profile img */}
             Change Profile Image
@@ -125,7 +122,7 @@ export default function Settings({ userId }) {
           </h4>
         </IonRow>
         <IonRow className="loginDeleteBtn">
-          <IonButton>Delete</IonButton>
+          <IonButton onClick={deleteUser}>Delete</IonButton>
         </IonRow>
       </IonContent>
     </IonPage>

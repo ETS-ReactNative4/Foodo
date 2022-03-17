@@ -4,11 +4,10 @@ import dbT from "../service/service.jsx";
 
 export default function User({ userId, postLocale, postCountry }) {
   const [user, setUser] = useState({});
-  
 
   useEffect(() => {
     const userArr = async () => {
-      const u = await dbT.getSingleUser('-MyMc4rqtKR3kFhoLW_L');
+      const u = await dbT.getSingleUser('-MyMz-aRRU9knsrC4vFb');
       setUser(u);
     };
     userArr();
@@ -17,17 +16,16 @@ export default function User({ userId, postLocale, postCountry }) {
 
   return (
     <>
-    
       <IonRow>
         <IonCol size="7">
-          {user.username}
+          {user?.username}
           <br></br>
           <span className="geoText">{postLocale}</span>
           <br/>
           <span className="geoText">{postCountry}</span>
         </IonCol>
         <IonCol size="5">
-          <img className="round" src={user.profileImg} alt="" />
+          <img className="round" src={user?.profileImg} alt="" />
         </IonCol>
       </IonRow>
     </>
