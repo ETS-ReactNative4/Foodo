@@ -25,6 +25,9 @@ import dbT from "../service/service.jsx";
 import camera from "../service/cam.jsx";
 import { Geolocation } from '@capacitor/geolocation';
 import "../style/AddPost.css";
+import uc from "../service/userControl.jsx";
+import { getIdToken } from "@firebase/auth";
+import { isEmpty } from "@firebase/util";
 
 
 // import { Camera, CameraResultType } from "@capacitor/camera";
@@ -36,6 +39,7 @@ export default function PostForm({ post, handleSubmit }) {
     const [title, setTitle] = useState("");
     const [Description, setDescription] = useState("");
     const [image, setImage] = useState("");
+    const [currentUser, setCurrentUser] = useState("");
   
     const [locale, setLocale] = useState("");
     const [country, setCountry] = useState("");
@@ -73,16 +77,23 @@ const getLocation = async (lo, la) => {
     
     console.log(country);
 }
-
+   
     
 
     useEffect(() => {
+        const getId=async() => {
+            setCurrentUser(await uc.getUserKey());
+        }
+        
         if (post) {
             setTitle(post.title);
             setDescription(post.Description);
             
+            
+
             // setImage(post.image);
         }
+        getId();
     }, [post]);
 
    
@@ -91,15 +102,18 @@ const getLocation = async (lo, la) => {
 
     
 
-    async function submitEvent(event) {
+    function submitEvent(event) {
         event.preventDefault();
         
-        console.log(locale);
+       
+        console.log('Virk', currentUser);
         //const formData = { title: title, Description: Description };
         //handleSubmit(formData);
-        if(title != null && Description != null){
-        dbT.createPost(title, Description, image, 2, country, locale);
-        history.replace('/home');
+        if(title != null && Description != null && !isEmpty(currentUser)){
+          
+        dbT.createPost(title, Description, image, currentUser, country, locale);
+        console.log('User', currentUser);
+        //history.replace('/home');
         }
     }
 
@@ -114,6 +128,7 @@ const getLocation = async (lo, la) => {
     //     setImageFile(image);
     //     setImage(image.dataUrl);
     // }
+    
     return (
         <>
         <form onSubmit={submitEvent}>

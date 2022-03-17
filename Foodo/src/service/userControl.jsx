@@ -6,12 +6,12 @@ class userControl{
 
     async login(mail, pass){
         console.log('login is running');
-        const data = await dbT.fetchLogin();
+        const data = await dbT.getUser();
 
         
            
             // map object into an array with objects
-            const userLogin = Object.keys(data).map((key) => ({
+            const users = Object.keys(data).map((key) => ({
               key: key,
               ...data[key],
             }));
@@ -19,15 +19,15 @@ class userControl{
             
           
 
-        console.log(userLogin);
-        for(const login of userLogin){
-            if(login.email == mail && login.password == pass){
-                this.loggedUser = await dbT.getSingleUser(login.id);
+        console.log(users);
+        for(const user of users){
+            if(user.username == mail && user.password == pass){
+                this.loggedUser = user;
                
                 console.log('succes:', this.loggedUser);
-              //  const user = JSON.stringify(this.loggedUser);
-                //localStorage.setItem("user", user);
-                
+                const userT = JSON.stringify(this.loggedUser);
+                localStorage.setItem("user", userT);
+                return this.loggedUser;
                 
             }else{
                 console.log('failure');
@@ -39,9 +39,16 @@ class userControl{
     async getLoggedUser(){
         
         const user = await JSON.parse(localStorage.getItem("user"));
-        console.log(user);
+        console.log(user.key);
         
         return user;
+    }
+
+    async getUserKey(){
+        const user = await JSON.parse(localStorage.getItem("user"));
+        console.log(user.key);
+        
+        return user.key;
     }
 
 }
