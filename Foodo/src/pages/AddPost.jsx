@@ -116,22 +116,9 @@ const getLocation = async (lo, la) => {
         //history.replace('/home');
         }
     }
-  }, [post]);
+ 
 
-  async function submitEvent(event) {
-    event.preventDefault();
-
-    // async function takePicture() {
-    //     const imageOptions = {
-    //         quality: 80,
-    //         width: 500,
-    //         allowEditing: true,
-    //         resultType: CameraResultType.DataUrl
-    //     };
-    //     const image = await Camera.getPhoto(imageOptions);
-    //     setImageFile(image);
-    //     setImage(image.dataUrl);
-    // }
+  
     
     return (
         <>
