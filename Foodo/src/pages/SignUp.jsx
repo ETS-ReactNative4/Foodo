@@ -20,7 +20,7 @@ import {
   import dbT from "../service/service.jsx";
   import camera from "../service/cam.jsx";
   import { cameraOutline} from 'ionicons/icons';
-  import '../style/SignUp.css';
+
  
   import { useHistory } from "react-router";
   import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
@@ -56,6 +56,8 @@ import {
               const errorMessage = error.message;
               // ..
             });
+          const id = await dbT.createUser(mail, image);
+          await dbT.createLogin(mail, password, id);
         }
     return (
         <>
