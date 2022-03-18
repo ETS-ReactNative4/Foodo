@@ -18,11 +18,11 @@
   flex-direction: column;
 }
 
-.loginDeleteBtn {
-  justify-content: end;
+.deleteLogoutBtns{
+  justify-content: space-between;
 }
 
-.loginDeleteBtn ion-button {
+.deleteLogoutBtns ion-button:last-child {
   color: var(--ion-color-danger);
   --background: none;
 }

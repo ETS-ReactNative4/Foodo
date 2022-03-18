@@ -15,8 +15,10 @@ import UserEdit from "../components/UserEdit";
 import LoginEdit from "../components/LoginEdit";
 import photo from "../service/cam";
 import uc from "../service/userControl";
+import { useHistory } from "react-router";
 
 export default function Settings({ userId }) {
+  const history = useHistory();
   const [user, setUser] = useState([]);
   const [image, setImage] = useState("");
 
@@ -32,7 +34,7 @@ export default function Settings({ userId }) {
     console.log(image);
   };
 
- // gettings promise from userKey and not the actual key value - seek help
+  // gettings promise from userKey and not the actual key value - seek help
   const userKey = uc.getUserKey();
 
   async function updateUser(userToUpdate) {
@@ -45,6 +47,11 @@ export default function Settings({ userId }) {
     // dbT.deleteUser(userKey);
     console.log("user deleted");
     console.log(userKey);
+  }
+
+  function logoutUser() {
+    uc.logout();
+    history.replace("/login");
   }
 
   useEffect(() => {
@@ -87,23 +94,6 @@ export default function Settings({ userId }) {
           >
             <UserEdit user={userId} handleSubmit={updateUser}></UserEdit>
           </IonRow>
-          {/* Email */}
-          {/* <h4>Email:</h4>
-          <p className="settingsUser">
-            {login?.email}
-            <IonButton onClick={handleToggle2}>
-              <IonIcon slot="icon-only" icon={brush}></IonIcon>
-              {isEmailOpen ? "" : ""}
-            </IonButton>
-          </p>
-          <IonRow
-            className={`settingsUserNav ${isEmailOpen ? "showUserEdit" : ""}`}
-          >
-            <LoginEdit
-              userEmail={userId}
-              handleSubmit={updateEmail}
-            ></LoginEdit>
-          </IonRow> */}
           <h4>
             {/* Profile img */}
             Change Profile Image
@@ -112,8 +102,9 @@ export default function Settings({ userId }) {
             </IonButton>
           </h4>
         </IonRow>
-        <IonRow className="loginDeleteBtn">
-          <IonButton onClick={deleteUser}>Delete</IonButton>
+        <IonRow className="deleteLogoutBtns">
+          <IonButton onClick={logoutUser}>Logout</IonButton>
+          <IonButton  onClick={deleteUser}>Delete</IonButton>
         </IonRow>
       </IonContent>
     </IonPage>

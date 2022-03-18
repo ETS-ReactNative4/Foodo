@@ -33,7 +33,11 @@ class userControl{
                 console.log('failure');
             }
         }
+    }
 
+    logout(){
+        localStorage.clear();
+        console.log("user is logged out");
     }
 
     async getLoggedUser(){
