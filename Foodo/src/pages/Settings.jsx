@@ -46,7 +46,6 @@ export default function Settings({ userId }) {
     };
     await dbT.updateUser(userKey, userToUpdate);
     localStorage.setItem("user", JSON.stringify(u));
-    console.log(u);
   }
 
   async function deleteUser() {

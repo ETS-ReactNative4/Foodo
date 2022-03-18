@@ -19,8 +19,6 @@ class Db {
     }
     console.log(this.posts);
     return this.posts;
-
-    
   }
 
   async fetchUser() {
