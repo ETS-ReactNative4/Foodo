@@ -18,27 +18,34 @@ import uc from "../service/userControl";
 export default function Profile() {
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [array, setArray] = useState([]);
 
 
   
 
   async function userPosts() {
+   const p = await dbT.getPost();
    
-    const po = await dbT.getPost();
-    const u = await uc.getUserKey();
+   const u = await uc.getUserKey();
+   
+   let arr = [];
+  
+   const postsArray = Object.keys(p).map((key) => ({
+    key: key,
+    ...p[key],
+  }));
 
-    const p = Object.keys(po).map((key) => ({
-      key: key,
-      ...po[key],
-    }));
 
-   console.log(p);
-    const userPosts = p.map(post => {
-        const posts = p.find(post => post.uid === u);
-        
-        return posts;
-    });
-    setPosts(userPosts);
+   for(const po of postsArray){
+    console.log(u);
+     if(po.uid === u){
+       arr.push(po);
+       console.log(po);
+
+     }
+   }
+   console.log(arr);
+   setArray(arr);
 }
   
   async function loadUser() {
@@ -48,12 +55,14 @@ export default function Profile() {
 
   function init(){
     loadUser();
-    userPosts();
+    
   }
   
 
   useIonViewWillEnter(() =>{
     init();
+    userPosts();
+    
   })
 
   return (
@@ -77,8 +86,8 @@ export default function Profile() {
           </IonCol>
         </IonRow>
         <IonRow>
-          {posts && posts.length > 0 ? (
-            posts?.map((post) => <Post post={post} key={post.id} />)
+          {array && array.length > 0 ? (
+            array?.map((array) => <Post post={array} key={array.id} />)
           ) : (
             <p>Loading...</p>
           )}
