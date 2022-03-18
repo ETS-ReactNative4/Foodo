@@ -5,6 +5,7 @@ import {
   IonCol,
   IonButton,
   IonIcon,
+  useIonViewWillEnter,
 } from "@ionic/react";
 import "../style/Settings.css";
 import dbT from "../service/service.jsx";
@@ -34,19 +35,23 @@ export default function Settings({ userId }) {
     console.log(image);
   };
 
-  // gettings promise from userKey and not the actual key value - seek help
-  const userKey = uc.getUserKey();
-
   async function updateUser(userToUpdate) {
+    const userKey = await uc.getUserKey();
+    const u = {
+      key: userKey,
+      id: user.id,
+      password: user.password,
+      profileImg: user.profileImg,
+      username: userToUpdate.username,
+    };
     await dbT.updateUser(userKey, userToUpdate);
-    console.log(userToUpdate);
-    console.log("updateUser");
+    localStorage.setItem("user", JSON.stringify(u));
+    console.log(u);
   }
 
   async function deleteUser() {
     // dbT.deleteUser(userKey);
     console.log("user deleted");
-    console.log(userKey);
   }
 
   function logoutUser() {
@@ -54,14 +59,22 @@ export default function Settings({ userId }) {
     history.replace("/login");
   }
 
-  useEffect(() => {
-    async function loadUser() {
-      const users = await uc.getLoggedUser(userKey);
-      setUser(users);
-      console.log(userKey);
-    }
-    loadUser();
-  }, []);
+  // useEffect(() => {
+  //   async function loadUser() {
+  //     const userKey = await uc.getUserKey();
+  //     const users = await uc.getLoggedUser(userKey);
+  //     setUser(users);
+  //     console.log(users);
+  //   }
+  //   loadUser();
+  // }, []);
+
+  useIonViewWillEnter(async () => {
+    const userKey = await uc.getUserKey();
+    const users = await uc.getLoggedUser(userKey);
+    setUser(users);
+    console.log(users);
+  });
 
   return (
     <IonPage>
@@ -104,7 +117,7 @@ export default function Settings({ userId }) {
         </IonRow>
         <IonRow className="deleteLogoutBtns">
           <IonButton onClick={logoutUser}>Logout</IonButton>
-          <IonButton  onClick={deleteUser}>Delete</IonButton>
+          <IonButton onClick={deleteUser}>Delete</IonButton>
         </IonRow>
       </IonContent>
     </IonPage>
