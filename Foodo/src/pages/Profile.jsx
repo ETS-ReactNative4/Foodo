@@ -6,6 +6,7 @@ import {
   IonButton,
   IonRow,
   IonCol,
+  useIonViewWillEnter,
 } from "@ionic/react";
 import "../style/Profile.css";
 import Header from "../components/Header";
@@ -18,22 +19,42 @@ export default function Profile() {
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    //load posts with user
-    async function loadUserPosts() {
-      const p = await dbT.getPost();
-      const u = await dbT.getUser();
-    }
-    
-    async function loadUser() {
-      const users = await uc.getLoggedUser();
-      setUser(users);
-    }
-    
-    loadUser();
-    console.log(posts);
 
-  }, []);
+  
+
+  async function userPosts() {
+   
+    const po = await dbT.getPost();
+    const u = await uc.getUserKey();
+
+    const p = Object.keys(po).map((key) => ({
+      key: key,
+      ...po[key],
+    }));
+
+   console.log(p);
+    const userPosts = p.map(post => {
+        const posts = p.find(post => post.uid === u);
+        
+        return posts;
+    });
+    setPosts(userPosts);
+}
+  
+  async function loadUser() {
+    const users = await uc.getLoggedUser();
+    setUser(users);
+  }
+
+  function init(){
+    loadUser();
+    userPosts();
+  }
+  
+
+  useIonViewWillEnter(() =>{
+    init();
+  })
 
   return (
     <IonPage>
