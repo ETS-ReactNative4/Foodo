@@ -6,6 +6,7 @@ import {
   IonButton,
   IonRow,
   IonCol,
+  useIonViewWillEnter,
 } from "@ionic/react";
 import "../style/Profile.css";
 import Header from "../components/Header";
@@ -17,23 +18,52 @@ import uc from "../service/userControl";
 export default function Profile() {
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [array, setArray] = useState([]);
 
-  useEffect(() => {
-    //load posts with user
-    async function loadUserPosts() {
-      const p = await dbT.getPost();
-      const u = await dbT.getUser();
-    }
-    
-    async function loadUser() {
-      const users = await uc.getLoggedUser();
-      setUser(users);
-    }
-    
+
+  
+
+  async function userPosts() {
+   const p = await dbT.getPost();
+   
+   const u = await uc.getUserKey();
+   
+   let arr = [];
+  
+   const postsArray = Object.keys(p).map((key) => ({
+    key: key,
+    ...p[key],
+  }));
+
+
+   for(const po of postsArray){
+    console.log(u);
+     if(po.uid === u){
+       arr.push(po);
+       console.log(po);
+
+     }
+   }
+   console.log(arr);
+   setArray(arr);
+}
+  
+  async function loadUser() {
+    const users = await uc.getLoggedUser();
+    setUser(users);
+  }
+
+  function init(){
     loadUser();
-    console.log(posts);
+    
+  }
+  
 
-  }, []);
+  useIonViewWillEnter(() =>{
+    init();
+    userPosts();
+    
+  })
 
   return (
     <IonPage>
@@ -56,8 +86,8 @@ export default function Profile() {
           </IonCol>
         </IonRow>
         <IonRow>
-          {posts && posts.length > 0 ? (
-            posts?.map((post) => <Post post={post} key={post.id} />)
+          {array && array.length > 0 ? (
+            array?.map((array) => <Post post={array} key={array.id} />)
           ) : (
             <p>Loading...</p>
           )}
