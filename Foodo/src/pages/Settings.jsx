@@ -14,14 +14,13 @@ import { camera, brush } from "ionicons/icons";
 import UserEdit from "../components/UserEdit";
 import LoginEdit from "../components/LoginEdit";
 import photo from "../service/cam";
+import uc from "../service/userControl";
 
 export default function Settings({ userId }) {
   const [user, setUser] = useState([]);
-  const [login, setLogin] = useState([]);
   const [image, setImage] = useState("");
 
   const [isUsernameOpen, setIsUsernameOpen] = useState(false);
-  const [isEmailOpen, setIsEmailOpen] = useState(false);
 
   const handleToggle = () => {
     setIsUsernameOpen((prev) => !prev);
@@ -33,36 +32,28 @@ export default function Settings({ userId }) {
     console.log(image);
   };
 
+ // gettings promise from userKey and not the actual key value - seek help
+  const userKey = uc.getUserKey();
+
   async function updateUser(userToUpdate) {
-    await dbT.updateUser(user, userToUpdate);
-    console.log(user.id);
+    await dbT.updateUser(userKey, userToUpdate);
     console.log(userToUpdate);
     console.log("updateUser");
-    console.log(userId);
   }
 
   async function deleteUser() {
-    // dbT.deletePost(user.id);
+    // dbT.deleteUser(userKey);
     console.log("user deleted");
-    console.log(user.id);
+    console.log(userKey);
   }
 
-  const userKey = "-MyMz-aRRU9knsrC4vFb";
-
   useEffect(() => {
-    // async function loadUserLogin() {
-    //   const userLogin = await dbT.getSingleLogin(userKey);
-    //   setLogin(userLogin);
-    //   console.log(userLogin);
-    // }
-    //load user
     async function loadUser() {
-      const users = await dbT.getSingleUser(userKey);
+      const users = await uc.getLoggedUser(userKey);
       setUser(users);
-      console.log(users);
+      console.log(userKey);
     }
     loadUser();
-    // loadUserLogin();
   }, []);
 
   return (
