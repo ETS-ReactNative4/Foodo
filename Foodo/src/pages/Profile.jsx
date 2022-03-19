@@ -7,7 +7,7 @@ import {
   IonRow,
   IonCol,
   useIonViewWillEnter,
-  useIonLoading
+  useIonLoading,
 } from "@ionic/react";
 import "../style/Profile.css";
 import Header from "../components/Header";
@@ -15,6 +15,7 @@ import dbT from "../service/service.jsx";
 import { useEffect, useState } from "react";
 import Post from "../components/post";
 import uc from "../service/userControl";
+import { useHistory } from "react-router";
 
 export default function Profile() {
   const [user, setUser] = useState([]);
@@ -22,51 +23,47 @@ export default function Profile() {
   const [array, setArray] = useState([]);
   const [present, dismiss] = useIonLoading();
 
-
-  
+  const history = useHistory();
 
   async function userPosts() {
     present();
-   const p = await dbT.getPost();
-   
-   const u = await uc.getUserKey();
-   
-   let arr = [];
-  
-   const postsArray = Object.keys(p).map((key) => ({
-    key: key,
-    ...p[key],
-  }));
+    const p = await dbT.getPost();
 
+    const u = await uc.getUserKey();
 
-   for(const po of postsArray){
-    console.log(u);
-     if(po.uid === u){
-       arr.push(po);
-       console.log(po);
+    let arr = [];
 
-     }
-   }
-   console.log(arr);
-   setArray(arr.reverse);
-   dismiss();
-}
-  
+    const postsArray = Object.keys(p).map((key) => ({
+      key: key,
+      ...p[key],
+    }));
+
+    for (const po of postsArray) {
+      console.log(u);
+      if (po.uid === u) {
+        arr.push(po);
+        console.log(po);
+      }
+    }
+    console.log(arr);
+    setArray(arr.reverse());
+    dismiss();
+  }
+
   async function loadUser() {
     const users = await uc.getLoggedUser();
     setUser(users);
   }
 
-  
-  
-
-  useIonViewWillEnter(async() =>{
-    
-    loadUser();
-    userPosts();
-    
-    
-  })
+  useIonViewWillEnter(async () => {
+    if (uc.checkUserLoggedIn()) {
+      loadUser();
+      userPosts();
+    } else {
+      history.replace("/login");
+      window.location.reload();
+    }
+  });
 
   return (
     <IonPage>

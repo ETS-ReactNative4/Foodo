@@ -11,7 +11,7 @@ import "../style/Settings.css";
 import dbT from "../service/service.jsx";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
-import { camera, brush } from "ionicons/icons";
+import { camera, brush, logOut } from "ionicons/icons";
 import UserEdit from "../components/UserEdit";
 import photo from "../service/cam";
 import uc from "../service/userControl";
@@ -60,37 +60,36 @@ export default function Settings({ userId }) {
     }
   }
 
-  async function deleteUser() {
-    const userKey = await uc.getUserKey();
-    await dbT.deleteUser(userKey);
-    uc.logout();
-    history.push("/login");
-    console.log("user deleted");
-  }
-
-  async function logoutUser() {
+  async function logoutUser(e) {
+    e.preventDefault();
     uc.logout();
     history.push({
       pathname: "/login",
     });
-    console.log("logged Out");
+    window.location.reload();
   }
 
-  // useEffect(() => {
-  //   async function loadUser() {
-  //     const userKey = await uc.getUserKey();
-  //     const users = await uc.getLoggedUser(userKey);
-  //     setUser(users);
-  //     console.log(users);
-  //   }
-  //   loadUser();
-  // }, []);
+  async function deleteUser(e) {
+    e.preventDefault();
+    const userKey = await uc.getUserKey();
+    await dbT.deleteUser(userKey);
+    uc.logout();
+    history.push({
+      pathname: "/signup",
+    });
+    window.location.reload();
+  }
 
   useIonViewWillEnter(async () => {
-    const userKey = await uc.getUserKey();
-    const users = await uc.getLoggedUser(userKey);
-    setUser(users);
-    console.log(users);
+    if (uc.checkUserLoggedIn()) {
+      const userKey = await uc.getUserKey();
+      const users = await uc.getLoggedUser(userKey);
+      setUser(users);
+      
+    } else {
+      history.replace("/login");
+      window.location.reload();
+    }
   });
 
   return (

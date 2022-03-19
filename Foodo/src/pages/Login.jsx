@@ -11,6 +11,8 @@ import {
   IonInput,
   IonTextarea,
   IonIcon,
+  useIonLoading,
+  useIonViewWillEnter,
 } from "@ionic/react";
 import "../style/Sign.css";
 import Header from "../components/Header";
@@ -20,10 +22,12 @@ import { useHistory } from "react-router";
 import { Toast } from "@capacitor/toast";
 import { isEmpty } from "@firebase/util";
 
+
 export default function PostForm() {
   const history = useHistory();
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
+  const [present, dismiss] = useIonLoading();
 
   function CheckIfEmpty(mail, pwd) {
     let check = false;
@@ -49,6 +53,11 @@ export default function PostForm() {
       });
     }
   }
+
+  useIonViewWillEnter(()=> {
+    present();
+    dismiss();
+  })
 
   return (
     <>

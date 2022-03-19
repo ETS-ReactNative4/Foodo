@@ -14,10 +14,7 @@ class Db {
   }
 
   async getPost() {
-    if (this.posts.length === 0) {
-      await this.fetchPost();
-    }
-    console.log(this.posts);
+    await this.fetchPost();
     return this.posts;
   }
 
@@ -152,7 +149,7 @@ class Db {
       method: "PUT",
       body: JSON.stringify({ ...post, ...updatePost }),
     });
-
+    
     
     console.log(id);
  

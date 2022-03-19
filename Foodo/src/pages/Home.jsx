@@ -7,7 +7,7 @@ import {
   useIonViewWillEnter,
   IonRefresher,
   IonRefresherContent,
-  useIonLoading
+  useIonLoading,
 } from "@ionic/react";
 import "../style/Home.css";
 import Post from "../components/post";
@@ -24,58 +24,57 @@ export default function Home() {
   const history = useHistory();
   const [present, dismiss] = useIonLoading();
 
+
   async function postsArr() {
     present();
+    
     const data = await dbT.getPost();
-    dismiss();
+    
     // map object into an array with objects
     const postsArray = Object.keys(data).map((key) => ({
       key: key,
       ...data[key],
     }));
-    
-    setPosts(postsArray.reverse);
-    
-    return postsArray;
+
+    setPosts(postsArray.reverse());
+    dismiss();
   }
 
-  function refresh(){
+  function refresh() {
     window.location.reload();
     postsArr();
   }
 
   function doRefresh(event) {
-    console.log('Begin async operation');
-  
+    console.log("Begin async operation");
+
     setTimeout(() => {
-      console.log('Async operation has ended');
+      console.log("Async operation has ended");
       event.detail.complete();
     }, 2000);
   }
 
-  
+  useIonViewWillEnter(() => {
+    if(uc.checkUserLoggedIn()){
+      postsArr();
+    }else{
+      history.replace("/login");
+      window.location.reload();
+    }
+  });
 
-  useIonViewWillEnter(async () => {
-    
-    
-    postsArr();
-    
-    
-    
-});
+
 
   return (
     <IonPage>
       <Header />
       <IonContent fullscreen>
-      <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
-        <IonRefresherContent>
-        </IonRefresherContent>
-      </IonRefresher>
+        <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
         {posts.map((post) => (
-          <Post post={post} key={post.key} reload={refresh}/>
+          <Post post={post} key={post.key} reload={refresh} />
         ))}
-        
       </IonContent>
     </IonPage>
   );

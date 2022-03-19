@@ -15,7 +15,6 @@ import { useState } from "react";
 
 export default function Post({ post, reload }) {
   const [isShow, setIsShow] = useState(false);
-  console.log(post.uid);
 
   async function updatePost(postToUpdate) {
     await dbT.updatePost(post.key, postToUpdate);
@@ -50,7 +49,7 @@ export default function Post({ post, reload }) {
           </IonRow>
           <IonRow className="postCardRow">{post.body}</IonRow>
         </IonCardContent>
-        {isShow && <PostEdit post={post.key} handleSubmit={updatePost}/>}
+        {isShow && <PostEdit post={post.key} handleSubmit={updatePost} p={post} />}
       </IonCard>
     </>
   );

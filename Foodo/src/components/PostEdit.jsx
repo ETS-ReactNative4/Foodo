@@ -2,16 +2,20 @@ import { IonItem, IonInput, IonLabel, IonButton } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { Toast } from "@capacitor/toast";
 import { isEmpty } from "@firebase/util";
+import dbT from "../service/service.jsx";
 
-export default function PostEdit({ post, handleSubmit }) {
+export default function PostEdit({ post, handleSubmit, p }) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
-  function submitEvent(event) {
+
+
+  async function submitEvent(event) {
     event.preventDefault();
-    const formData = { title: title, body: body };
+    const formData = {title: title, body: body };
     handleSubmit(formData);
-    
+    console.log(post);
+
     Toast.show({
       text: "Post Updated",
     });
@@ -19,8 +23,8 @@ export default function PostEdit({ post, handleSubmit }) {
 
   useEffect(() => {
     if (post) {
-      setTitle(post.title);
-      setBody(post.body);
+      setTitle(p.title);
+      setBody(p.body);
     }
   }, [post]);
 

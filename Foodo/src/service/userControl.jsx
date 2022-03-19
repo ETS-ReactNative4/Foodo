@@ -1,4 +1,5 @@
 
+import { isEmpty } from "@firebase/util";
 import dbT from "./service.jsx";
 
 class userControl{
@@ -8,16 +9,11 @@ class userControl{
         console.log('login is running');
         const data = await dbT.getUser();
 
-        
-           
             // map object into an array with objects
             const users = Object.keys(data).map((key) => ({
               key: key,
               ...data[key],
             }));
-            
-            
-          
 
         console.log(users);
         for(const user of users){
@@ -33,6 +29,8 @@ class userControl{
                 console.log('failure');
             }
         }
+        
+
     }
 
     logout(){
@@ -42,9 +40,7 @@ class userControl{
 
     async getLoggedUser(){
         
-        const user = await JSON.parse(localStorage.getItem("user"));
-        console.log(user.key);
-        
+        const user = await JSON.parse(localStorage.getItem("user"));        
         return user;
     }
 
@@ -53,6 +49,17 @@ class userControl{
         console.log(user.key);
         
         return user.key;
+    }
+
+    checkUserLoggedIn(){
+        let check = false;
+        const loggedUser = localStorage.getItem("user");
+        if(loggedUser != null){
+            check = true;
+        }
+        console.log(loggedUser);
+        console.log(check);
+        return check;
     }
 
 }
