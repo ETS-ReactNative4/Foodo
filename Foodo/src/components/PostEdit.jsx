@@ -1,5 +1,7 @@
 import { IonItem, IonInput, IonLabel, IonButton } from "@ionic/react";
 import { useEffect, useState } from "react";
+import {Toast} from "@capacitor/toast";
+
 
 export default function PostEdit({ post, handleSubmit }) {
   const [title, setTitle] = useState("");
@@ -9,6 +11,10 @@ export default function PostEdit({ post, handleSubmit }) {
     event.preventDefault();
     const formData = { title: title, body: body };
     handleSubmit(formData);
+
+    Toast.show({
+      text: "Post Updated",
+    })
   }
 
   useEffect(() => {

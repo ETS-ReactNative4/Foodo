@@ -45,7 +45,7 @@ export default function Profile() {
      }
    }
    console.log(arr);
-   setArray(arr);
+   setArray(arr.reverse());
 }
   
   async function loadUser() {

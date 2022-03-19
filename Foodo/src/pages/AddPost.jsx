@@ -30,6 +30,8 @@ import "../style/AddPost.css";
 import uc from "../service/userControl.jsx";
 import { getIdToken } from "@firebase/auth";
 import { isEmpty } from "@firebase/util";
+import {Toast} from "@capacitor/toast";
+
 
 // import { Camera, CameraResultType } from "@capacitor/camera";
 // import { camera } from "ionicons/icons";
@@ -96,8 +98,13 @@ export default function PostForm({ post, handleSubmit }) {
     if (title != null && Description != null && !isEmpty(currentUser)) {
       dbT.createPost(title, Description, image, currentUser, country, locale);
       console.log("User", currentUser);
-      //history.replace('/home');
+      history.replace('/profile');
     }
+
+    Toast.show({
+      text: "Post Created",
+    })
+
   }
 
   //   async function submitEvent(event) {

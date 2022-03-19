@@ -60,7 +60,7 @@ const App = () => (
             <Profile />
           </Route>
           <Route exact path="/">
-            <Redirect to="/home" />
+            <Redirect to="/frontpage" />
           </Route>
           <Route exact path="/frontpage">
             <FrontPage />

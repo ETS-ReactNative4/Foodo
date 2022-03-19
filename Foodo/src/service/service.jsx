@@ -79,7 +79,6 @@ class Db {
       id: id,
       email: email,
       password: password,
-      
     };
     const response = await fetch(this.userUrl + ".json", {
       method: "POST",

@@ -3,6 +3,7 @@ import "../style/PostActionsMenu.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import dbT from "../service/service.jsx";
+import {Toast} from "@capacitor/toast";
 
 export default function PostActionMenu({ post, handleIsShow }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,6 +23,10 @@ export default function PostActionMenu({ post, handleIsShow }) {
     dbT.deletePost(post);
     console.log("post deleted");
     console.log(post);
+
+    await Toast.show({
+      text: "Post Deleted",
+    })
   }
 
   return (

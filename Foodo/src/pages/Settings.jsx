@@ -13,10 +13,11 @@ import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import { camera, brush } from "ionicons/icons";
 import UserEdit from "../components/UserEdit";
-import LoginEdit from "../components/LoginEdit";
 import photo from "../service/cam";
 import uc from "../service/userControl";
 import { useHistory } from "react-router";
+import { Toast } from "@capacitor/toast";
+import { isEmpty } from "@firebase/util";
 
 export default function Settings({ userId }) {
   const history = useHistory();
@@ -44,8 +45,19 @@ export default function Settings({ userId }) {
       profileImg: user.profileImg,
       username: userToUpdate.username,
     };
-    await dbT.updateUser(userKey, userToUpdate);
-    localStorage.setItem("user", JSON.stringify(u));
+    if (isEmpty(userToUpdate.username)) {
+      await Toast.show({
+        text: "Field is empty",
+      });
+    } else {
+      await dbT.updateUser(userKey, userToUpdate);
+      localStorage.setItem("user", JSON.stringify(u));
+      setIsUsernameOpen(false);
+
+      await Toast.show({
+        text: "Username Updated",
+      });
+    }
   }
 
   async function deleteUser() {
