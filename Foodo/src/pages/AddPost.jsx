@@ -30,8 +30,7 @@ import "../style/AddPost.css";
 import uc from "../service/userControl.jsx";
 import { getIdToken } from "@firebase/auth";
 import { isEmpty } from "@firebase/util";
-import {Toast} from "@capacitor/toast";
-
+import { Toast } from "@capacitor/toast";
 
 // import { Camera, CameraResultType } from "@capacitor/camera";
 // import { camera } from "ionicons/icons";
@@ -95,16 +94,20 @@ export default function PostForm({ post, handleSubmit }) {
     console.log("Virk", currentUser);
     //const formData = { title: title, Description: Description };
     //handleSubmit(formData);
-    if (title != null && Description != null && !isEmpty(currentUser)) {
+    if (isEmpty(title) || isEmpty(Description) || isEmpty(currentUser)) {
+      Toast.show({
+        text: "Missing Fields",
+      });
+    } else {
       dbT.createPost(title, Description, image, currentUser, country, locale);
       console.log("User", currentUser);
-      history.replace('/profile');
+      history.replace("/profile");
+      console.log(title);
+
+      Toast.show({
+        text: "Post Created",
+      });
     }
-
-    Toast.show({
-      text: "Post Created",
-    })
-
   }
 
   //   async function submitEvent(event) {

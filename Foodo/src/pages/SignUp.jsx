@@ -22,7 +22,7 @@ import camera from "../service/cam.jsx";
 import { cameraOutline } from "ionicons/icons";
 
 import { useHistory } from "react-router";
-import { async, isEmpty } from "@firebase/util";
+import { isEmpty } from "@firebase/util";
 import { Toast } from "@capacitor/toast";
 
 export default function SignUp() {

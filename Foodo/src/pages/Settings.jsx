@@ -61,13 +61,19 @@ export default function Settings({ userId }) {
   }
 
   async function deleteUser() {
-    // dbT.deleteUser(userKey);
+    const userKey = await uc.getUserKey();
+    await dbT.deleteUser(userKey);
+    uc.logout();
+    history.push("/login");
     console.log("user deleted");
   }
 
-  function logoutUser() {
+  async function logoutUser() {
     uc.logout();
-    history.replace("/login");
+    history.push({
+      pathname: "/login",
+    });
+    console.log("logged Out");
   }
 
   // useEffect(() => {
@@ -127,8 +133,12 @@ export default function Settings({ userId }) {
           </h4>
         </IonRow>
         <IonRow className="deleteLogoutBtns">
-          <IonButton onClick={logoutUser}>Logout</IonButton>
-          <IonButton onClick={deleteUser}>Delete</IonButton>
+          <form onSubmit={logoutUser}>
+            <IonButton type="submit">Logout</IonButton>
+          </form>
+          <form onSubmit={deleteUser}>
+            <IonButton type="submit">Delete</IonButton>
+          </form>
         </IonRow>
       </IonContent>
     </IonPage>

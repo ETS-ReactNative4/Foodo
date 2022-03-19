@@ -23,7 +23,7 @@ export default function Home() {
       ...data[key],
     }));
     
-    return postsArray;
+    return postsArray.reverse();
   }
 
   
