@@ -3,9 +3,11 @@ import "../style/PostActionsMenu.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import dbT from "../service/service.jsx";
+import { useHistory } from "react-router";
 
-export default function PostActionMenu({ post, handleIsShow }) {
+export default function PostActionMenu({ post, handleIsShow, reload }) {
   const [isOpen, setIsOpen] = useState(false);
+  const history = useHistory();
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
@@ -19,7 +21,8 @@ export default function PostActionMenu({ post, handleIsShow }) {
 
   async function deletePost() {
     setIsOpen(false);
-    dbT.deletePost(post);
+    await dbT.deletePost(post);
+    //reload();
     console.log("post deleted");
     console.log(post);
   }
