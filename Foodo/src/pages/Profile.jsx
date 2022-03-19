@@ -7,6 +7,7 @@ import {
   IonRow,
   IonCol,
   useIonViewWillEnter,
+  useIonLoading
 } from "@ionic/react";
 import "../style/Profile.css";
 import Header from "../components/Header";
@@ -19,11 +20,13 @@ export default function Profile() {
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
   const [array, setArray] = useState([]);
+  const [present, dismiss] = useIonLoading();
 
 
   
 
   async function userPosts() {
+    present();
    const p = await dbT.getPost();
    
    const u = await uc.getUserKey();
@@ -45,7 +48,8 @@ export default function Profile() {
      }
    }
    console.log(arr);
-   setArray(arr.reverse());
+   setArray(arr.reverse);
+   dismiss();
 }
   
   async function loadUser() {
@@ -53,15 +57,14 @@ export default function Profile() {
     setUser(users);
   }
 
-  function init(){
-    loadUser();
-    
-  }
+  
   
 
-  useIonViewWillEnter(() =>{
-    init();
+  useIonViewWillEnter(async() =>{
+    
+    loadUser();
     userPosts();
+    
     
   })
 

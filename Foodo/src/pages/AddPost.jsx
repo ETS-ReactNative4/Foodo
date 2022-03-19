@@ -15,6 +15,7 @@ import {
   IonItem,
   IonIcon,
   IonLabel,
+  useIonLoading,
   IonButton,
   IonTabButton,
   useIonViewDidEnter,
@@ -41,6 +42,7 @@ export default function PostForm({ post, handleSubmit }) {
   const [Description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [currentUser, setCurrentUser] = useState("");
+  const [present, dismiss] = useIonLoading();
 
   const [locale, setLocale] = useState("");
   const [country, setCountry] = useState("");
@@ -88,10 +90,12 @@ export default function PostForm({ post, handleSubmit }) {
     getId();
   }, [post]);
 
+ 
+
   function submitEvent(event) {
     event.preventDefault();
 
-    console.log("Virk", currentUser);
+    
     //const formData = { title: title, Description: Description };
     //handleSubmit(formData);
     if (isEmpty(title) || isEmpty(Description) || isEmpty(currentUser)) {

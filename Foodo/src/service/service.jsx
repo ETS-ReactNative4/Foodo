@@ -67,6 +67,7 @@ class Db {
       body: JSON.stringify(post),
     });
     const data = await response.json();
+    this.posts.push(post);
     //this.posts.push(data);
     console.log(data);
   }
@@ -151,7 +152,10 @@ class Db {
       method: "PUT",
       body: JSON.stringify({ ...post, ...updatePost }),
     });
-    console.log(response);
+
+    
+    console.log(id);
+ 
   }
 
   async updateUser(id, updateUser) {

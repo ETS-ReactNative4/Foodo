@@ -13,12 +13,13 @@ import PostActionsMenu from "./PostActionsMenu";
 import PostEdit from "./PostEdit";
 import { useState } from "react";
 
-export default function Post({ post }) {
+export default function Post({ post, reload }) {
   const [isShow, setIsShow] = useState(false);
   console.log(post.uid);
 
   async function updatePost(postToUpdate) {
-    dbT.updatePost(post.key, postToUpdate);
+    await dbT.updatePost(post.key, postToUpdate);
+    reload();
     console.log(post.key);
     console.log(postToUpdate);
     setIsShow(false);
@@ -27,7 +28,7 @@ export default function Post({ post }) {
   return (
     <>
       <IonCard className="cardContainer">
-        <PostActionsMenu post={post.key} handleIsShow={setIsShow} />
+        <PostActionsMenu post={post.key} handleIsShow={setIsShow} reload={reload}/>
         <IonCardHeader>
           <img src={post.url} alt="" />
         </IonCardHeader>
@@ -49,7 +50,7 @@ export default function Post({ post }) {
           </IonRow>
           <IonRow className="postCardRow">{post.body}</IonRow>
         </IonCardContent>
-        {isShow && <PostEdit post={post.key} handleSubmit={updatePost} />}
+        {isShow && <PostEdit post={post.key} handleSubmit={updatePost}/>}
       </IonCard>
     </>
   );
