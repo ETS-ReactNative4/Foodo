@@ -10,10 +10,15 @@ import "../style/Home.css";
 import Post from "../components/post";
 import { useState } from "react";
 import dbT from "../service/service.jsx";
-import Header from '../components/Header';
+import Header from "../components/Header";
+import uc from "../service/userControl";
+import { isEmpty } from "@firebase/util";
+import { Toast } from "@capacitor/toast";
+import { useHistory } from "react-router";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
+  const history = useHistory();
 
   async function postsArr() {
     const data = await dbT.getPost();
@@ -22,17 +27,15 @@ export default function Home() {
       key: key,
       ...data[key],
     }));
-    
+
     return postsArray.reverse();
   }
-
-  
 
   useIonViewWillEnter(async () => {
     const p = await postsArr();
     setPosts(p);
     console.log(p);
-});
+  });
 
   return (
     <IonPage>

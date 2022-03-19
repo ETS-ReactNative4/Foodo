@@ -8,7 +8,6 @@ export default function Header() {
   return (
     <>
       <IonHeader>
-        
           <IonTabButton href="../" className="backbutton">
             <IonIcon icon={arrowBackOutline} />
           </IonTabButton>

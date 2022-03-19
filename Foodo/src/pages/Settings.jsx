@@ -124,13 +124,6 @@ export default function Settings({ userId }) {
           >
             <UserEdit user={userId} handleSubmit={updateUser}></UserEdit>
           </IonRow>
-          <h4>
-            {/* Profile img */}
-            Change Profile Image
-            <IonButton onClick={savePicture}>
-              <IonIcon slot="icon-only" icon={camera}></IonIcon>
-            </IonButton>
-          </h4>
         </IonRow>
         <IonRow className="deleteLogoutBtns">
           <form onSubmit={logoutUser}>
