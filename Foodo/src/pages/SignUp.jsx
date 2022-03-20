@@ -82,29 +82,31 @@ export default function SignUp() {
       <div className="SignForm">
         <form onSubmit={signUpHandler}>
           <IonItem>
-            <IonLabel>E-mail</IonLabel>
+            <IonLabel>Username:</IonLabel>
             <IonInput
               value={mail}
-              placeholder="E-mail"
+              placeholder="Username"
               onIonChange={(e) => setMail(e.target.value)}
             />
           </IonItem>
           <IonItem>
-            <IonLabel>Password</IonLabel>
-            <IonTextarea
+            <IonLabel>Password:</IonLabel>
+            <IonInput
+              type="password"
               value={password}
               placeholder="Password"
               onIonChange={(e) => setPassword(e.target.value)}
-            ></IonTextarea>
+            ></IonInput>
           </IonItem>
 
           <IonItem>
-            <IonLabel>Repeat</IonLabel>
-            <IonTextarea
+            <IonLabel>Repeat:</IonLabel>
+            <IonInput
+              type="password"
               value={rPassword}
               placeholder=" Password"
               onIonChange={(e) => setRPassword(e.target.value)}
-            ></IonTextarea>
+            ></IonInput>
           </IonItem>
 
           <IonAvatar className="imageSignUp">

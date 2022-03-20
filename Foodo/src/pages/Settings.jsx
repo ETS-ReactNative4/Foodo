@@ -57,6 +57,7 @@ export default function Settings({ userId }) {
       await Toast.show({
         text: "Username Updated",
       });
+      window.location.reload();
     }
   }
 

@@ -67,20 +67,21 @@ export default function PostForm() {
       <div className="SignForm">
         <form onSubmit={submitHandler}>
           <IonItem>
-            <IonLabel>E-mail</IonLabel>
+            <IonLabel>Username:</IonLabel>
             <IonInput
               value={mail}
-              placeholder="E-mail"
+              placeholder="Username"
               onIonChange={(e) => setMail(e.target.value)}
             />
           </IonItem>
           <IonItem>
-            <IonLabel>Password</IonLabel>
-            <IonTextarea
+            <IonLabel>Password:</IonLabel>
+            <IonInput
+            type="password"
               value={password}
               placeholder="Password"
               onIonChange={(e) => setPassword(e.target.value)}
-            ></IonTextarea>
+            ></IonInput>
           </IonItem>
 
           <div className="ion-padding">
