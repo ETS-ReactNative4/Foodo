@@ -23,7 +23,7 @@ export default function PostActionMenu({ post, handleIsShow, reload }) {
   async function deletePost() {
     setIsOpen(false);
     await dbT.deletePost(post);
-    //reload();
+    reload();
     console.log("post deleted");
     console.log(post);
 
