@@ -1,5 +1,5 @@
 # Foodo
-Foodo
+Foodo - by Thomas, Christoffer R, Jacob
 
 We created Foodo because we're tired of food pictures flowing around on social media like facebook, Instagram and snapchat. So we wanted to bring all food pictures from your restaurant, or workout preparation meal, in one single app. So whenever you want to connect with your friends, you can post, watch or even get inspiration for your next meal!
 
