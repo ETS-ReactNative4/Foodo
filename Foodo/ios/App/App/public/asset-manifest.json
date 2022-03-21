@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.e88d0755.css",
-    "main.js": "/static/js/main.bbdfcd6d.js",
+    "main.js": "/static/js/main.0fa020e7.js",
     "static/js/3630.682a8d7e.chunk.js": "/static/js/3630.682a8d7e.chunk.js",
     "static/js/3107.740d4295.chunk.js": "/static/js/3107.740d4295.chunk.js",
     "static/js/7397.7dfa81da.chunk.js": "/static/js/7397.7dfa81da.chunk.js",
@@ -94,7 +94,7 @@
     "static/media/FOODO-logo.png": "/static/media/FOODO-logo.99280aeba1adc8960d68.png",
     "index.html": "/index.html",
     "main.e88d0755.css.map": "/static/css/main.e88d0755.css.map",
-    "main.bbdfcd6d.js.map": "/static/js/main.bbdfcd6d.js.map",
+    "main.0fa020e7.js.map": "/static/js/main.0fa020e7.js.map",
     "3630.682a8d7e.chunk.js.map": "/static/js/3630.682a8d7e.chunk.js.map",
     "3107.740d4295.chunk.js.map": "/static/js/3107.740d4295.chunk.js.map",
     "7397.7dfa81da.chunk.js.map": "/static/js/7397.7dfa81da.chunk.js.map",
@@ -185,6 +185,6 @@
   },
   "entrypoints": [
     "static/css/main.e88d0755.css",
-    "static/js/main.bbdfcd6d.js"
+    "static/js/main.0fa020e7.js"
   ]
 }

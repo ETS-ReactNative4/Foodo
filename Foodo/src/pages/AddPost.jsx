@@ -95,7 +95,7 @@ export default function PostForm({ post, handleSubmit }) {
 
  
 
-  function submitEvent(event) {
+  async function submitEvent(event) {
     event.preventDefault();
     printCurrentPosition();
     
@@ -106,7 +106,7 @@ export default function PostForm({ post, handleSubmit }) {
         text: "Missing Fields",
       });
     } else {
-      dbT.createPost(title, Description, image, currentUser, country, locale);
+      await dbT.createPost(title, Description, image, currentUser, country, locale);
       console.log("User", currentUser);
       history.replace("/profile");
       console.log(title);
